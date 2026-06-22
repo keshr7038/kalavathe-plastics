@@ -1,0 +1,21 @@
+{
+  "userSettings": {
+    "globalPermissionGrants": {
+      "allow": [
+        "command(npx)",
+        "command(npm install)",
+        "command(npm run)",
+        "read_url(localhost)",
+        "command(git status)",
+        "command(git remote)",
+        "command(gh)",
+        "command(gh)",
+        "command(Get-ChildItem)",
+        "command(Copy-Item)",
+        "read_url(dtreatfarms.in)",
+        "command(Remove-Item)",
+        "command(npm i)"
+      ]
+    }
+  }
+}
