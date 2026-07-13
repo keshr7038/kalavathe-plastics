@@ -187,9 +187,109 @@ async function loadDashboardData() {
     renderOverviewAnalytics(cachedInquiriesList);
     renderProductManagerTable(cachedProductsList);
     populateSettingsForm();
+
+    if (cachedProductsList && cachedProductsList.length > 0) {
+      migrateAndCompressOversizedImages(cachedProductsList);
+    }
   } catch (err) {
     console.error('Error loading dashboard data:', err);
     alert('Dashboard Load Error: ' + err.message);
+  }
+}
+
+// --- SELF-HEALING DATABASE MIGRATION FOR OVERSIZED IMAGES ---
+async function migrateAndCompressOversizedImages(products) {
+  let migrated = false;
+  const migratedProducts = [];
+
+  for (const product of products) {
+    const newImages = [];
+    let productMigrated = false;
+
+    if (product.images && Array.isArray(product.images)) {
+      for (const imgStr of product.images) {
+        // If it's a base64 string and is oversized (length > 150,000 chars, ~110KB)
+        if (imgStr && imgStr.startsWith('data:image/') && imgStr.length > 150000) {
+          try {
+            console.log(`Compressing oversized image for product: ${product.name}`);
+            const compressed = await new Promise((resolve, reject) => {
+              const img = new Image();
+              img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const maxDim = 800;
+                let width = img.width;
+                let height = img.height;
+                
+                if (width > height) {
+                  if (width > maxDim) {
+                    height = Math.round(height * (maxDim / width));
+                    width = maxDim;
+                  }
+                } else {
+                  if (height > maxDim) {
+                    width = Math.round(width * (maxDim / height));
+                    height = maxDim;
+                  }
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+              };
+              img.onerror = () => reject(new Error('Image load fail'));
+              img.src = imgStr;
+            });
+            newImages.push(compressed);
+            productMigrated = true;
+            migrated = true;
+          } catch (e) {
+            console.error('Migration compress failed:', e);
+            newImages.push(imgStr);
+          }
+        } else {
+          newImages.push(imgStr);
+        }
+      }
+    }
+
+    if (productMigrated) {
+      migratedProducts.push({ ...product, images: newImages });
+    } else {
+      migratedProducts.push(product);
+    }
+  }
+
+  if (migrated) {
+    console.log('Successfully compressed oversized images.');
+    try {
+      localStorage.setItem('products', JSON.stringify(migratedProducts));
+    } catch (err) {
+      console.error('Failed to save migrated products locally:', err);
+    }
+    
+    if (typeof SupabaseDB !== 'undefined' && SupabaseDB.isConfigured && SupabaseDB.client) {
+      try {
+        const dbProducts = migratedProducts.map(p => ({
+          id: p.id,
+          name: p.name,
+          category: p.category,
+          description: p.description,
+          badge: p.badge || null,
+          variants: p.variants || [],
+          features: p.features || [],
+          images: p.images || []
+        }));
+        await SupabaseDB.client.from('products').upsert(dbProducts);
+        console.log('Supabase successfully updated with compressed images.');
+      } catch (err) {
+        console.error('Failed to sync migrated products to Supabase:', err);
+      }
+    }
+    
+    cachedProductsList = migratedProducts;
+    renderProductManagerTable(cachedProductsList);
   }
 }
 
