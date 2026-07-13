@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kalavathe Plastics - Kadapa's premium wholesale and retail polymer products partner. Serving businesses with modern industrial solutions.">
-  <title>Kalavathe Plastics | Premium Industrial Polymer Solutions</title>
-  <link rel="stylesheet" href="styles.css?v=1.2">
+  <meta name="description" content="Curated, elevated lifestyle essentials for your home. Explore our collection of premium storage, kitchenware, cleaning accessories, and home goods.">
+  <title>Kalavathe Home | Curated Home & Lifestyle Essentials</title>
+  <link rel="stylesheet" href="styles.css?v=1.3">
 </head>
 <body>
 
@@ -14,21 +14,22 @@
     <div class="container nav-container">
       <a href="#" class="logo">
         <span class="logo-icon">K</span>
-        <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span></span>
+        <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">HOME</span></span>
       </a>
       
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#category-highlights">Collections</a></li>
+          <li><a href="#products">Shop</a></li>
+          <li><a href="#why-us">About</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
       <div class="nav-actions">
-        <button id="cart-toggle" class="cart-toggle" aria-label="Open Inquiry Cart">
+        <button id="cart-toggle" class="cart-toggle" aria-label="Open Inquiry List">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
@@ -44,66 +45,85 @@
   <section id="hero" class="hero">
     <div class="container hero-grid">
       <div class="hero-content reveal">
-        <span class="badge">ESTABLISHED WHOLESALER</span>
-        <h1 class="hero-title text-gradient">Kadapa's Trusted Plastic Wholesale Partner</h1>
-        <p class="hero-description">
-          From household essentials to industrial plastic solutions, serving retailers, businesses, and bulk buyers with quality products and dependable supply.
+        <span class="badge">Curated Home Essentials</span>
+        <h1 class="hero-title text-gradient">Elevate Your Everyday</h1>
+        <p class="hero-description" style="color: var(--color-secondary-text); margin-bottom: 2.5rem;">
+          Beautifully crafted, high-quality home essentials designed to bring order, comfort, and simple luxury to your living spaces.
         </p>
         <div class="hero-actions">
-          <a href="#products" class="btn btn-primary">Explore Products</a>
+          <a href="#category-highlights" class="btn btn-primary">Explore the Collection</a>
         </div>
       </div>
       <div class="hero-visual reveal">
-        <div class="visual-canvas">
-          <div class="glass-sphere"></div>
-          <!-- Floating Mockups -->
-          <div class="product-float float-1">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <div class="product-info">
-              <h5>Polymer Sheets</h5>
-              <span>Wholesale Pack</span>
-            </div>
-          </div>
-          <div class="product-float float-2">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-            <div class="product-info">
-              <h5>Rigid PVC Pipes</h5>
-              <span>IS-Certified</span>
-            </div>
-          </div>
-          <div class="product-float float-3">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-            <div class="product-info">
-              <h5>Storage Drums</h5>
-              <span>HDPE Grade</span>
-            </div>
-          </div>
-          <div class="product-float float-4">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <div class="product-info">
-              <h5>Bistro Chairs</h5>
-              <span>Matte Finish</span>
-            </div>
-          </div>
-        </div>
+        <img src="assets/lifestyle-hero.png" alt="Premium Lifestyle Homeware" class="hero-image">
       </div>
     </div>
   </section>
 
-  <!-- TRUST & STATISTICS -->
-  <section id="stats" class="stats">
-    <div class="container stats-grid">
-      <div class="stat-card">
-        <div class="stat-number" id="stat-delivered" data-target="5000">0+</div>
-        <div class="stat-label">Products Sold</div>
+  <!-- CATEGORY HIGHLIGHTS -->
+  <section id="category-highlights" class="section-padding" style="background-color: var(--color-primary-bg);">
+    <div class="container">
+      <div class="product-header reveal" style="text-align: center; margin-bottom: 4rem;">
+        <span class="badge">Curated Collections</span>
+        <h2>Elevating Everyday Spaces</h2>
+        <p>Thoughtfully designed lifestyle essentials, crafted with care to bring beauty and simplicity to your home.</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat-retailers" data-target="1000">0+</div>
-        <div class="stat-label">Retail Customers</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat-exp" data-target="15">0+</div>
-        <div class="stat-label">Years Experience</div>
+      
+      <div class="category-grid">
+        <div class="category-tile reveal" data-category="Storage & Utility">
+          <div class="category-tile-image-wrapper">
+            <img src="assets/cat-storage-utility.png" alt="Storage & Utility" class="category-tile-image">
+          </div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-content">
+            <span class="category-tile-label">Storage & Utility</span>
+            <span class="category-tile-sub">Curated Organization</span>
+          </div>
+        </div>
+        
+        <div class="category-tile reveal" data-category="Kitchen & Dining">
+          <div class="category-tile-image-wrapper">
+            <img src="assets/cat-kitchen-dining.png" alt="Kitchen & Dining" class="category-tile-image">
+          </div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-content">
+            <span class="category-tile-label">Kitchen & Dining</span>
+            <span class="category-tile-sub">Artful Hosting</span>
+          </div>
+        </div>
+        
+        <div class="category-tile reveal" data-category="Cleaning Essentials">
+          <div class="category-tile-image-wrapper">
+            <img src="assets/cat-cleaning-essentials.png" alt="Cleaning Essentials" class="category-tile-image">
+          </div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-content">
+            <span class="category-tile-label">Cleaning Essentials</span>
+            <span class="category-tile-sub">Aesthetic Care</span>
+          </div>
+        </div>
+        
+        <div class="category-tile reveal" data-category="Bathroom Accessories">
+          <div class="category-tile-image-wrapper">
+            <img src="assets/cat-bathroom-accessories.png" alt="Bathroom Accessories" class="category-tile-image">
+          </div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-content">
+            <span class="category-tile-label">Bathroom Accessories</span>
+            <span class="category-tile-sub">Private Sanctuary</span>
+          </div>
+        </div>
+        
+        <div class="category-tile reveal" data-category="Home & Garden">
+          <div class="category-tile-image-wrapper">
+            <img src="assets/cat-home-garden.png" alt="Home & Garden" class="category-tile-image">
+          </div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-content">
+            <span class="category-tile-label">Home & Garden</span>
+            <span class="category-tile-sub">Botanical Living</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -112,9 +132,9 @@
   <section id="products" class="section-padding">
     <div class="container">
       <div class="product-header reveal">
-        <span class="badge">Premium Products</span>
-        <h2>Explore Collections</h2>
-        <p>Use filters or search to browse high-grade polymer options. Add items to your inquiry list for direct WhatsApp quotation.</p>
+        <span class="badge">The Boutique Catalog</span>
+        <h2>Shop the Collection</h2>
+        <p>Explore our thoughtfully sourced essentials. Add items to your inquiry list to receive a custom quote and finalize details over WhatsApp.</p>
       </div>
 
 
@@ -147,52 +167,52 @@
     <div class="container">
       <div class="product-header reveal">
         <span class="badge">Our Standards</span>
-        <h2>Why Retailers Choose Kalavathe</h2>
-        <p>Leading Kadapa with consistent polymer grade distribution, fair trade wholesale prices, and local reliability.</p>
+        <h2>Thoughtfully Sourced, Artfully Crafted</h2>
+        <p>We believe everyday essentials should inspire comfort and beauty. We curate products that represent simple luxury and dependable quality.</p>
       </div>
 
       <div class="why-us-grid">
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Wholesale Pricing</h3>
-          <p>Highly competitive rates tailored for bulk purchases, allowing local retailers to maximize their profit margins.</p>
+          <h3>Curated Quality</h3>
+          <p>Each item is thoughtfully selected for its elegant aesthetic and excellent utility, ensuring a premium feel in your home.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
-          <h3>Reliable Supply</h3>
-          <p>Continuous warehouse stock, preventing shortages in critical industrial packaging or seasonal retail goods.</p>
+          <h3>Transparent Value</h3>
+          <p>Thoughtfully priced for the way you shop, offering fair and transparent wholesale value on all orders.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
           </div>
-          <h3>Premium Quality</h3>
-          <p>Sourced strictly from certified polymer manufacturers using virgin materials to ensure durability and durability.</p>
+          <h3>Modern Durability</h3>
+          <p>Crafted using food-safe, high-durability polymer resins that stand the test of time and repeated use.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <h3>Fast Response</h3>
-          <p>Streamlined communication with WhatsApp-driven automated inquiries, letting you finalize quotes within hours.</p>
+          <h3>Dedicated Chat Response</h3>
+          <p>We compile your selections into structured list templates to offer you clear quotation support directly over WhatsApp.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></circle><circle cx="12" cy="10" r="3"></circle></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 6v6l4 2"/></svg>
           </div>
-          <h3>Local Expertise</h3>
-          <p>Deep understanding of the Rayalaseema market logistics and custom demands of Kadapa businesses.</p>
+          <h3>Local Presence</h3>
+          <p>Proudly serving Kadapa and the Rayalaseema region with local delivery logistics and personalized order support.</p>
         </div>
         <div class="why-card reveal">
           <div class="why-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
-          <h3>Trusted Service</h3>
-          <p>Over a decade of transparency. Officially registered Composition Tax Payer following legal trade procedures.</p>
+          <h3>Heritage Trust</h3>
+          <p>A decade of transparent wholesale service, operating under full legal trade and GST compliance guidelines.</p>
         </div>
       </div>
     </div>
@@ -202,9 +222,9 @@
   <section id="process" class="section-padding">
     <div class="container">
       <div class="product-header reveal">
-        <span class="badge">Methodical Workflow</span>
+        <span class="badge">The Inquiry Journey</span>
         <h2>How We Partner With You</h2>
-        <p>Our ordering process is designed to save time, providing frictionless digital product selections and direct supplier chat.</p>
+        <p>Our simple, six-step digital catalog and WhatsApp workflow lets you curate and inquire about your collections seamlessly.</p>
       </div>
 
       <div class="timeline-container reveal">
@@ -214,33 +234,33 @@
         <div class="timeline-grid">
           <div class="timeline-step">
             <div class="timeline-node">1</div>
-            <div class="timeline-title">Browse Products</div>
-            <div class="timeline-desc">Filter product items based on your needs.</div>
+            <div class="timeline-title">Browse Collections</div>
+            <div class="timeline-desc">Filter product items based on your home or business needs.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">2</div>
             <div class="timeline-title">Add to Inquiry</div>
-            <div class="timeline-desc">Collate your desired items in the inquiry list.</div>
+            <div class="timeline-desc">Collate your desired essentials in your personal inquiry list.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">3</div>
-            <div class="timeline-title">WhatsApp Contact</div>
-            <div class="timeline-desc">Send the structured template directly to us.</div>
+            <div class="timeline-title">Send WhatsApp</div>
+            <div class="timeline-desc">Forward the structured inquiry list directly to our team.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">4</div>
             <div class="timeline-title">Receive Quote</div>
-            <div class="timeline-desc">We reply with exact wholesale price ranges.</div>
+            <div class="timeline-desc">We reply with exact wholesale price ranges and availability.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">5</div>
             <div class="timeline-title">Confirm Order</div>
-            <div class="timeline-desc">Finalize dispatch list and order details.</div>
+            <div class="timeline-desc">Finalize dispatch list and custom order details.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">6</div>
-            <div class="timeline-title">Delivery</div>
-            <div class="timeline-desc">Secure transport loading and drop at Kadapa/region.</div>
+            <div class="timeline-title">Handover</div>
+            <div class="timeline-desc">Secure transport loading and local delivery drop at Kadapa region.</div>
           </div>
         </div>
       </div>
@@ -251,39 +271,39 @@
   <section id="testimonials" class="section-padding">
     <div class="container">
       <div class="product-header reveal">
-        <span class="badge">Reviews</span>
-        <h2>Partnering For Shared Success</h2>
-        <p>Hear from local retail store owners, construction contractors, and packaging distributors who purchase in bulk.</p>
+        <span class="badge">Patrons Reviews</span>
+        <h2>Kind Words from Our Partners</h2>
+        <p>Hear from boutique design consultants, home organizers, and premium lifestyle retailers who source their essentials with us.</p>
       </div>
 
       <div class="testimonials-slider reveal">
         <div class="testimonial-card">
-          <p class="testimonial-text">"Sourcing kitchenware and household plastic units from Kalavathe has helped us maintain constant shelf stock. Excellent quality at wholesale margins."</p>
+          <p class="testimonial-text">"Sourcing kitchenware and home organization units from Kalavathe has helped us elevate our boutique display. The quality is exceptional and fits our premium theme."</p>
           <div class="testimonial-profile">
             <div class="profile-avatar">S</div>
             <div class="profile-info">
-              <h4>Sreenivas Retailers</h4>
-              <span>Supermarket Owner, Kadapa</span>
+              <h4>Srinivas Homeware</h4>
+              <span>Boutique Concept Store, Kadapa</span>
             </div>
           </div>
         </div>
         <div class="testimonial-card">
-          <p class="testimonial-text">"Their rigid PVC conduit pipes and storage tanks are highly robust. Excellent bulk pricing, and they arrange quick local transport directly to the site."</p>
+          <p class="testimonial-text">"Their terracotta planters and sleek storage carafes are highly appreciated by our styling clients. Excellent pricing structure and prompt responses on chat."</p>
           <div class="testimonial-profile">
             <div class="profile-avatar">V</div>
             <div class="profile-info">
-              <h4>Venkata Constructions</h4>
-              <span>Civil Contractor, Kadapa Region</span>
+              <h4>Venkata Design Studio</h4>
+              <span>Interior Styling Consultant, Kadapa</span>
             </div>
           </div>
         </div>
         <div class="testimonial-card">
-          <p class="testimonial-text">"We regularly procure polythene sheets and bubble wrapping rolls from them. They maintain massive stock volumes and process orders instantly via WhatsApp."</p>
+          <p class="testimonial-text">"We regularly procure premium mats and outdoor accessories. They maintain a curated range and process our custom orders quickly over WhatsApp."</p>
           <div class="testimonial-profile">
             <div class="profile-avatar">R</div>
             <div class="profile-info">
-              <h4>Reddy Packaging Hub</h4>
-              <span>Logistics Distributor, Proddatur</span>
+              <h4>Reddy Lifestyle Hub</h4>
+              <span>Luxe Decor Curator, Proddatur</span>
             </div>
           </div>
         </div>
@@ -296,37 +316,37 @@
     <div class="container">
       <div class="product-header reveal">
         <span class="badge">Locate Us</span>
-        <h2>Reach Our Kadapa Shop</h2>
-        <p>Walk in to browse items in our warehouse or connect digitally. We are situated in the center of NGO Colony.</p>
+        <h2>Visit Our Showroom</h2>
+        <p>Step inside our Kadapa showroom to view the collections in person, or connect with us digitally for styling and quote support.</p>
       </div>
 
       <div class="contact-grid reveal">
         <div class="contact-info-cards">
           <div class="contact-info-card">
             <div class="contact-icon-box">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></circle><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></circle><circle cx="12" cy="10" r="3"></circle></svg>
             </div>
             <div class="contact-details">
-              <h4>Warehouse & Office Address</h4>
-              <p>Kalavathe Plastics, NGO Colony, Kadapa, Andhra Pradesh - 516001</p>
+              <h4>Atelier & Showroom Address</h4>
+              <p>Kalavathe Home, NGO Colony, Kadapa, Andhra Pradesh - 516001</p>
             </div>
           </div>
           <div class="contact-info-card">
             <div class="contact-icon-box">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             </div>
             <div class="contact-details">
-              <h4>Direct Supplier Contact</h4>
+              <h4>Direct Representative</h4>
               <p>Mobile: +91 99660 89248</p>
-              <p>WhatsApp: Click bottom right button to chat</p>
+              <p>WhatsApp: Active for quote responses</p>
             </div>
           </div>
           <div class="contact-info-card">
             <div class="contact-icon-box">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><polyline points="8 21 12 17 16 21"></polyline><line x1="12" y1="17" x2="12" y2="9"></line></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><polyline points="8 21 12 17 16 21"></polyline><line x1="12" y1="17" x2="12" y2="9"></line></svg>
             </div>
             <div class="contact-details">
-              <h4>Business Operation Hours</h4>
+              <h4>Showroom Hours</h4>
               <p>Monday - Saturday: 09:30 AM - 08:30 PM</p>
               <p>Sunday: Closed</p>
             </div>
@@ -388,20 +408,20 @@
   <footer>
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a href="#" class="logo" style="color: var(--color-primary-blue);">
-          <span class="logo-icon" style="background: linear-gradient(135deg, var(--color-accent), var(--color-primary-blue)); color: #FFFFFF;">K</span>
-          <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span></span>
+        <a href="#" class="logo" style="color: var(--color-primary-text);">
+          <span class="logo-icon" style="background: var(--color-accent); color: var(--color-warm-cream);">K</span>
+          <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">HOME</span></span>
         </a>
-        <p>Kadapa's premium commercial polymer distributor. Providing reliability, custom logistics, and wholesale supplies since 2011.</p>
+        <p>Thoughtfully curated home and lifestyle essentials, offering simple elegance and dependable quality since 2011.</p>
       </div>
       <div class="footer-links">
-        <h4>Product Groups</h4>
+        <h4>Our Collections</h4>
         <ul>
-          <li><a href="#products">Household Plastics</a></li>
-          <li><a href="#products">Premium Bistro Furniture</a></li>
-          <li><a href="#products">LDPE & Heavy Packaging</a></li>
-          <li><a href="#products">Water Storage Units</a></li>
-          <li><a href="#products">IS-Certified PVC Hoses</a></li>
+          <li><a href="#products">Storage & Utility</a></li>
+          <li><a href="#products">Kitchen & Dining</a></li>
+          <li><a href="#products">Cleaning Essentials</a></li>
+          <li><a href="#products">Bathroom Accessories</a></li>
+          <li><a href="#products">Home & Garden</a></li>
         </ul>
       </div>
       <div class="footer-contact">
@@ -409,12 +429,12 @@
         <div class="footer-contact-list">
           <p>📍 NGO Colony, Kadapa - 516001, AP</p>
           <p>📞 Cell: +91 99660 89248</p>
-          <p>✉️ info@kalavatheplastics.com</p>
+          <p>✉️ info@kalavathehome.com</p>
         </div>
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; 2026 Kalavathe Plastics. All rights reserved. Designed for local enterprise.
+      <p>&copy; 2026 Kalavathe Home. All rights reserved. Designed for curated living.
         <a href="admin.html" class="admin-lock-link" aria-label="Admin Login" title="Owner Access Only">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 6px; opacity: 0.6; transition: opacity 0.2s ease;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         </a>

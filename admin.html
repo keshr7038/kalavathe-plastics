@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kalavathe Plastics - Owner Administration Portal. Manage product listings and WhatsApp analytics securely.">
-  <title>Owner Admin Portal | Kalavathe Plastics</title>
-  <link rel="stylesheet" href="styles.css?v=1.2">
+  <meta name="description" content="Kalavathe Home - Owner Administration Portal. Manage product listings and WhatsApp analytics securely.">
+  <title>Owner Admin Portal | Kalavathe Home</title>
+  <link rel="stylesheet" href="styles.css?v=1.3">
   <style>
     /* Inline helper classes specific to the admin layout */
     .admin-body {
-      background: linear-gradient(135deg, #FFFFFF, #F7F9FB, #D3D9D9);
+      background: var(--color-primary-bg);
       min-height: 100vh;
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-body);
     }
   </style>
 </head>
@@ -23,7 +23,7 @@
   <div id="login-container" class="admin-login-wrapper">
     <div class="login-card reveal active">
       <div class="login-header">
-        <span class="logo-icon" style="background: linear-gradient(135deg, var(--color-accent), var(--color-primary-blue)); color: #FFFFFF; font-size: 1.5rem; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; margin-bottom: 1rem;">K</span>
+        <span class="logo-icon" style="background: var(--color-accent); color: var(--color-warm-cream); font-size: 1.5rem; width: 45px; height: 45px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 800; margin-bottom: 1rem;">K</span>
         <h2>Owner Admin Access</h2>
         <p>Enter credentials to access catalog editing and analytics logs.</p>
       </div>
@@ -58,8 +58,8 @@
     <!-- SIDEBAR / NAVIGATION -->
     <header class="admin-header">
       <div class="container nav-container">
-        <a href="index.html" class="logo" style="color: var(--color-primary-blue);">
-          <span class="logo-icon" style="background: linear-gradient(135deg, var(--color-accent), var(--color-primary-blue)); color: #FFFFFF;">K</span>
+        <a href="index.html" class="logo" style="color: var(--color-primary-text);">
+          <span class="logo-icon" style="background: var(--color-accent); color: var(--color-warm-cream);">K</span>
           <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">ADMIN</span></span>
         </a>
         <nav class="admin-nav-tabs">

@@ -665,7 +665,7 @@ if (sendWhatsAppBtn) {
   sendWhatsAppBtn.addEventListener('click', () => {
     if (inquiryCart.length === 0) return;
 
-    let message = `Hello Kalavathe Plastics,\n\n`;
+    let message = `Hello Kalavathe Home,\n\n`;
     message += `I am interested in the following products:\n`;
 
     inquiryCart.forEach(item => {
@@ -849,6 +849,24 @@ function initFloatingNotice() {
   }
 }
 
+// --- CATEGORY TILES NAVIGATION ---
+function initCategoryTiles() {
+  const categoryTiles = document.querySelectorAll('.category-tile');
+  categoryTiles.forEach(tile => {
+    tile.addEventListener('click', () => {
+      const category = tile.dataset.category;
+      const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+      if (targetBtn) {
+        targetBtn.click();
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+          productsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+}
+
 // --- BOOTSTRAP ---
 document.addEventListener('DOMContentLoaded', async () => {
   // Load products from Supabase cloud (or local fallback)
@@ -860,4 +878,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   initTimelineAnimation();
   initActiveNavLinks();
   initFloatingNotice();
+  initCategoryTiles();
 });
