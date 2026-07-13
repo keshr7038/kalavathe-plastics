@@ -69,12 +69,37 @@ const SupabaseDB = {
   // Fetch all products
   async fetchProducts() {
     let localProducts = this.safeParseLocalItem('products', []);
+    
+    // Check if localProducts cache contains old soap dishes images
+    let localUpdated = false;
+    const localSoapDish = localProducts.find(p => p.id === 'ba1');
+    if (localSoapDish) {
+      if (localSoapDish.images && localSoapDish.images.length === 5 && 
+          (localSoapDish.images[3] === 'assets/products/soap-holder-1.webp' || 
+           localSoapDish.images[3] === '/assets/products/soap-holder-1.webp') && 
+          (localSoapDish.images[4] === 'assets/products/soap-holder-1.webp' || 
+           localSoapDish.images[4] === '/assets/products/soap-holder-1.webp')) {
+        localSoapDish.images = [
+          'assets/products/soap-holder-1.webp',
+          'assets/products/soap-holder-2.webp',
+          'assets/products/soap-holder-3.webp',
+          'assets/products/soap-holder-detail-1.jpg',
+          'assets/products/soap-holder-detail-2.jpg'
+        ];
+        localUpdated = true;
+      }
+    }
+
     if (localProducts.length === 0 && typeof DEFAULT_PRODUCTS !== 'undefined') {
       localProducts = DEFAULT_PRODUCTS;
+      localUpdated = true;
+    }
+    
+    if (localUpdated) {
       try {
-        localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+        localStorage.setItem('products', JSON.stringify(localProducts));
       } catch (e) {
-        console.error('Failed to cache default products:', e);
+        console.error('Failed to cache products:', e);
       }
     }
     
@@ -93,6 +118,31 @@ const SupabaseDB = {
 
       if (data && data.length > 0) {
         console.log('Successfully fetched products from Supabase cloud.');
+        
+        // Dynamic sync for Soap Dish images in Supabase database
+        const soapDishIndex = data.findIndex(p => p.id === 'ba1');
+        if (soapDishIndex !== -1) {
+          const soapDish = data[soapDishIndex];
+          if (soapDish.images && soapDish.images.length === 5 && 
+              (soapDish.images[3] === 'assets/products/soap-holder-1.webp' || 
+               soapDish.images[3] === '/assets/products/soap-holder-1.webp') && 
+              (soapDish.images[4] === 'assets/products/soap-holder-1.webp' || 
+               soapDish.images[4] === '/assets/products/soap-holder-1.webp')) {
+            
+            console.log('Migrating Soap Dish images in Supabase...');
+            soapDish.images = [
+              'assets/products/soap-holder-1.webp',
+              'assets/products/soap-holder-2.webp',
+              'assets/products/soap-holder-3.webp',
+              'assets/products/soap-holder-detail-1.jpg',
+              'assets/products/soap-holder-detail-2.jpg'
+            ];
+            
+            // Push update to database async
+            this.saveProduct(soapDish).catch(e => console.error('Failed to sync migrated Soap Dish to database:', e));
+          }
+        }
+
         // Cache products locally to support offline fallback
         localStorage.setItem('products', JSON.stringify(data));
         return data;

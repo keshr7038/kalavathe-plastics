@@ -620,8 +620,8 @@ const DEFAULT_PRODUCTS = [
       "assets/products/soap-holder-1.webp",
       "assets/products/soap-holder-2.webp",
       "assets/products/soap-holder-3.webp",
-      "assets/products/soap-holder-1.webp",
-      "assets/products/soap-holder-1.webp"
+      "assets/products/soap-holder-detail-1.jpg",
+      "assets/products/soap-holder-detail-2.jpg"
     ],
     "thumbnail": "assets/products/soap-holder-1.webp",
     "whatsappMessage": "Hello, I'm interested in your wholesale product: Self-Draining Soap Dishes. Please provide pricing and minimum order quantity (MOQ) details."
