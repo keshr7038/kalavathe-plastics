@@ -665,7 +665,7 @@ if (sendWhatsAppBtn) {
   sendWhatsAppBtn.addEventListener('click', () => {
     if (inquiryCart.length === 0) return;
 
-    let message = `Hello Kalavathe Home,\n\n`;
+    let message = `Hello Kalavathi Plastics,\n\n`;
     message += `I am interested in the following products:\n`;
 
     inquiryCart.forEach(item => {
