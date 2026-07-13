@@ -253,7 +253,7 @@ function renderProducts(items) {
   items.forEach(product => {
     if (!product) return;
     const card = document.createElement('div');
-    card.className = 'product-card reveal';
+    card.className = 'product-card';
     card.dataset.id = product.id;
     const mainImg = product.images && product.images[0] ? product.images[0] : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="300" height="300" fill="%23eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="%23777">No Image</text></svg>';
     const badgeHtml = product.badge ? `<span class="product-badge">${product.badge}</span>` : '';
