@@ -1,9 +1,17 @@
 // --- PRODUCTS DATA ---
 // DEFAULT_PRODUCTS is loaded globally from products-data.js
 
-let PRODUCTS = JSON.parse(localStorage.getItem('products')) || DEFAULT_PRODUCTS;
-if (!localStorage.getItem('products')) {
-  localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+let PRODUCTS = DEFAULT_PRODUCTS;
+try {
+  const cached = localStorage.getItem('products');
+  if (cached) {
+    PRODUCTS = JSON.parse(cached) || DEFAULT_PRODUCTS;
+  } else {
+    localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+  }
+} catch (e) {
+  console.error('Failed to parse local storage products on startup:', e);
+  PRODUCTS = DEFAULT_PRODUCTS;
 }
 
 // --- APP STATE ---
@@ -873,17 +881,33 @@ function initCategoryTiles() {
 
 // --- BOOTSTRAP ---
 document.addEventListener('DOMContentLoaded', async () => {
-  // Initialize scroll reveals immediately so layout contents show
-  initScrollReveal();
-  
-  // Load products from Supabase cloud (or local fallback)
-  if (typeof SupabaseDB !== 'undefined') {
-    PRODUCTS = await SupabaseDB.fetchProducts();
+  try {
+    // Initialize scroll reveals immediately so layout contents show
+    initScrollReveal();
+    
+    // Load products from Supabase cloud (or local fallback)
+    if (typeof SupabaseDB !== 'undefined') {
+      console.log('Fetching products from Supabase DB...');
+      PRODUCTS = await SupabaseDB.fetchProducts();
+      console.log('Products loaded:', PRODUCTS ? PRODUCTS.length : 0);
+    }
+  } catch (err) {
+    console.error('Error fetching products during bootstrap:', err);
   }
-  renderProducts(PRODUCTS);
-  initStatsAnimation();
-  initTimelineAnimation();
-  initActiveNavLinks();
-  initFloatingNotice();
-  initCategoryTiles();
+
+  try {
+    renderProducts(PRODUCTS);
+  } catch (err) {
+    console.error('Error rendering products during bootstrap:', err);
+  }
+
+  try {
+    initStatsAnimation();
+    initTimelineAnimation();
+    initActiveNavLinks();
+    initFloatingNotice();
+    initCategoryTiles();
+  } catch (err) {
+    console.error('Error running animations/listeners during bootstrap:', err);
+  }
 });

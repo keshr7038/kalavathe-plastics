@@ -7,6 +7,18 @@ const SupabaseDB = {
   client: null,
   isConfigured: false,
 
+  // Helper for safe localStorage JSON parsing
+  safeParseLocalItem(key, defaultVal) {
+    try {
+      const item = localStorage.getItem(key);
+      if (!item) return defaultVal;
+      return JSON.parse(item) || defaultVal;
+    } catch (e) {
+      console.error(`Error parsing localStorage item for key "${key}":`, e);
+      return defaultVal;
+    }
+  },
+
   // Initialize client if credentials exist in localStorage
   init() {
     const isDisconnected = localStorage.getItem('supabaseDisconnected') === 'true';
@@ -56,10 +68,14 @@ const SupabaseDB = {
 
   // Fetch all products
   async fetchProducts() {
-    let localProducts = JSON.parse(localStorage.getItem('products')) || [];
+    let localProducts = this.safeParseLocalItem('products', []);
     if (localProducts.length === 0 && typeof DEFAULT_PRODUCTS !== 'undefined') {
       localProducts = DEFAULT_PRODUCTS;
-      localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+      try {
+        localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+      } catch (e) {
+        console.error('Failed to cache default products:', e);
+      }
     }
     
     if (!this.isConfigured || !this.client) {
@@ -94,7 +110,7 @@ const SupabaseDB = {
   async saveProduct(product) {
     // 1. Save locally first
     try {
-      let localProducts = JSON.parse(localStorage.getItem('products')) || [];
+      let localProducts = this.safeParseLocalItem('products', []);
       const idx = localProducts.findIndex(p => p.id === product.id);
       if (idx !== -1) {
         localProducts[idx] = product;
@@ -134,7 +150,7 @@ const SupabaseDB = {
   // Delete product
   async deleteProduct(id) {
     // 1. Delete locally first
-    let localProducts = JSON.parse(localStorage.getItem('products')) || [];
+    let localProducts = this.safeParseLocalItem('products', []);
     localProducts = localProducts.filter(p => p.id !== id);
     localStorage.setItem('products', JSON.stringify(localProducts));
 
@@ -156,7 +172,7 @@ const SupabaseDB = {
   // Log WhatsApp Inquiry
   async logInquiry(inquiry) {
     // 1. Log locally first
-    let localInquiries = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+    let localInquiries = this.safeParseLocalItem('whatsappInquiries', []);
     localInquiries.push(inquiry);
     localStorage.setItem('whatsappInquiries', JSON.stringify(localInquiries));
 
@@ -180,7 +196,7 @@ const SupabaseDB = {
 
   // Fetch all inquiry logs
   async fetchInquiries() {
-    const localInquiries = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+    const localInquiries = this.safeParseLocalItem('whatsappInquiries', []);
 
     if (!this.isConfigured || !this.client) {
       return localInquiries;
@@ -211,8 +227,8 @@ const SupabaseDB = {
       throw new Error('Supabase is not connected. Connect first in settings.');
     }
 
-    const products = JSON.parse(localStorage.getItem('products')) || [];
-    const inquiries = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+    const products = this.safeParseLocalItem('products', []);
+    const inquiries = this.safeParseLocalItem('whatsappInquiries', []);
 
     // 1. Upload products
     if (products.length > 0) {
