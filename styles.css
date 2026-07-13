@@ -2668,3 +2668,58 @@ footer {
   opacity: 1;
   animation-play-state: running;
 }
+
+
+
+/* --- BORDER BEAM GLOW ANIMATION --- */
+@property --beam-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-beam-card {
+  position: relative;
+  overflow: hidden;
+  --beam-color: var(--color-accent);
+  --beam-width: 2.5px;
+  --beam-duration: 2.8s;
+  --beam-blur: 6px;
+  z-index: 1;
+}
+
+.border-beam-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: var(--beam-width);
+  background: conic-gradient(from var(--beam-angle), var(--beam-color) 0%, transparent 28%, transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 var(--beam-blur) var(--beam-color));
+  transition: opacity 0.25s ease;
+  z-index: -1;
+  
+  /* Rotation animation */
+  animation: rotate-beam var(--beam-duration) linear infinite;
+  animation-play-state: paused;
+}
+
+@keyframes rotate-beam {
+  0% {
+    --beam-angle: 0deg;
+  }
+  100% {
+    --beam-angle: 360deg;
+  }
+}
+
+.border-beam-card:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
