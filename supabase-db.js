@@ -93,14 +93,19 @@ const SupabaseDB = {
   // Save/Upsert product
   async saveProduct(product) {
     // 1. Save locally first
-    let localProducts = JSON.parse(localStorage.getItem('products')) || [];
-    const idx = localProducts.findIndex(p => p.id === product.id);
-    if (idx !== -1) {
-      localProducts[idx] = product;
-    } else {
-      localProducts.push(product);
+    try {
+      let localProducts = JSON.parse(localStorage.getItem('products')) || [];
+      const idx = localProducts.findIndex(p => p.id === product.id);
+      if (idx !== -1) {
+        localProducts[idx] = product;
+      } else {
+        localProducts.push(product);
+      }
+      localStorage.setItem('products', JSON.stringify(localProducts));
+    } catch (err) {
+      console.error('Failed to save product locally:', err);
+      throw new Error('Local browser storage is full. Try reducing image dimensions/sizes.');
     }
-    localStorage.setItem('products', JSON.stringify(localProducts));
 
     // 2. Save to Supabase if connected
     if (this.isConfigured && this.client) {
@@ -121,6 +126,7 @@ const SupabaseDB = {
         console.log(`Product ${product.name} saved to Supabase.`);
       } catch (err) {
         console.error('Failed to sync product save to Supabase:', err);
+        throw err;
       }
     }
   },

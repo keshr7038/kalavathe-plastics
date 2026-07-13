@@ -438,21 +438,26 @@ if (productEditForm) {
       };
     }
 
-    if (typeof SupabaseDB !== 'undefined') {
-      await SupabaseDB.saveProduct(productObj);
-    } else {
-      let localProducts = JSON.parse(localStorage.getItem('products')) || [];
-      const idx = localProducts.findIndex(p => p.id === productObj.id);
-      if (idx !== -1) {
-        localProducts[idx] = productObj;
+    try {
+      if (typeof SupabaseDB !== 'undefined') {
+        await SupabaseDB.saveProduct(productObj);
       } else {
-        localProducts.push(productObj);
+        let localProducts = JSON.parse(localStorage.getItem('products')) || [];
+        const idx = localProducts.findIndex(p => p.id === productObj.id);
+        if (idx !== -1) {
+          localProducts[idx] = productObj;
+        } else {
+          localProducts.push(productObj);
+        }
+        localStorage.setItem('products', JSON.stringify(localProducts));
       }
-      localStorage.setItem('products', JSON.stringify(localProducts));
+      alert('Product saved successfully.');
+      closeFormModal();
+      loadDashboardData();
+    } catch (err) {
+      console.error('Save product error:', err);
+      alert('Error: Failed to save product. ' + (err.message || 'Check database connection or image size limits.'));
     }
-
-    closeFormModal();
-    loadDashboardData();
   });
 }
 
@@ -585,7 +590,49 @@ if (resetDbBtn) {
   });
 }
 
-// --- IMAGE FILE UPLOAD TO BASE64 TRANSLATORS ---
+// --- IMAGE FILE UPLOAD TO BASE64 TRANSLATORS (WITH COMPRESSION) ---
+function compressAndReadImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxDim = 800; // standard display resolution
+      let width = img.width;
+      let height = img.height;
+      
+      if (width > height) {
+        if (width > maxDim) {
+          height = Math.round(height * (maxDim / width));
+          width = maxDim;
+        }
+      } else {
+        if (height > maxDim) {
+          width = Math.round(width * (maxDim / height));
+          height = maxDim;
+        }
+      }
+      
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      // Export as highly compressed JPEG data URL
+      const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+      callback(null, compressedBase64);
+    };
+    img.onerror = (err) => {
+      callback(new Error('Failed to parse image file.'));
+    };
+    img.src = event.target.result;
+  };
+  reader.onerror = (err) => {
+    callback(err);
+  };
+  reader.readAsDataURL(file);
+}
+
 const fileInputs = [
   { fileEl: document.getElementById('file-product-image-1'), textEl: document.getElementById('edit-product-image-1') },
   { fileEl: document.getElementById('file-product-image-2'), textEl: document.getElementById('edit-product-image-2') },
@@ -597,22 +644,24 @@ fileInputs.forEach(({ fileEl, textEl }) => {
     fileEl.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
-        if (file.size > 1.5 * 1024 * 1024) {
-          alert('Error: Image file size is too large. Please select a file smaller than 1.5MB.');
-          fileEl.value = '';
-          return;
+        // Show temporary UI text change inside the file upload icon parent label
+        const originalText = fileEl.parentElement ? fileEl.parentElement.title : 'Choose File';
+        if (fileEl.parentElement) {
+          fileEl.parentElement.title = 'Processing...';
         }
         
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          textEl.value = event.target.result;
+        compressAndReadImage(file, (err, compressedBase64) => {
+          if (fileEl.parentElement) {
+            fileEl.parentElement.title = originalText;
+          }
+          if (err) {
+            console.error('File reading/compress error:', err);
+            alert('Failed to read and process image file.');
+            return;
+          }
+          textEl.value = compressedBase64;
           textEl.dispatchEvent(new Event('input'));
-        };
-        reader.onerror = (err) => {
-          console.error('File reading error:', err);
-          alert('Failed to read image file.');
-        };
-        reader.readAsDataURL(file);
+        });
       }
     });
   }
