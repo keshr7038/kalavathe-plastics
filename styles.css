@@ -2568,3 +2568,103 @@ footer {
 .category-tile:hover .category-tile-overlay {
   background: linear-gradient(180deg, rgba(36, 27, 21, 0) 30%, rgba(36, 27, 21, 0.85) 100%);
 }
+
+
+
+/* --- HERO LOGO CARD BORDER BEAM GLOW ANIMATION --- */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.hero-logo-card {
+  --beam-color: var(--color-accent);
+  --beam-width: 2px;
+  --beam-duration: 2.8s;
+  --beam-blur: 2px;
+  
+  position: relative;
+  z-index: 1;
+  background: var(--color-primary-text);
+  border: 1px solid rgba(184, 134, 46, 0.15);
+  border-radius: 16px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  width: fit-content;
+}
+
+/* Crisp Comet Beam */
+.hero-logo-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  padding: var(--beam-width);
+  background: conic-gradient(
+    from var(--angle),
+    var(--beam-color) 0deg,
+    rgba(184, 134, 46, 0.6) 45deg,
+    rgba(184, 134, 46, 0.1) 90deg,
+    transparent 120deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(var(--beam-blur));
+  transition: opacity 0.2s ease;
+  animation: rotate-beam var(--beam-duration) linear infinite;
+  animation-play-state: paused;
+  z-index: 2;
+}
+
+/* Outer Luminous Halo Glow */
+.hero-logo-card::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 18px;
+  padding: calc(var(--beam-width) + 2px);
+  background: conic-gradient(
+    from var(--angle),
+    var(--beam-color) 0deg,
+    rgba(184, 134, 46, 0.4) 45deg,
+    transparent 120deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.2s ease;
+  animation: rotate-beam var(--beam-duration) linear infinite;
+  animation-play-state: paused;
+  z-index: 1;
+}
+
+@keyframes rotate-beam {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.hero-logo-card:hover {
+  border-color: rgba(184, 134, 46, 0.35);
+  box-shadow: 0 10px 30px rgba(184, 134, 46, 0.12);
+}
+
+.hero-logo-card:hover::before,
+.hero-logo-card:hover::after {
+  opacity: 1;
+  animation-play-state: running;
+}
