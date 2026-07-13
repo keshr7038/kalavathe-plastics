@@ -19,6 +19,76 @@ const SupabaseDB = {
     }
   },
 
+  // Helper to map database rows to full details schema
+  enrichProduct(p) {
+    if (!p) return null;
+    
+    // 1. Slug
+    const slug = p.slug || p.name.toLowerCase()
+      .replace(/&/g, 'and')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+    // 2. Short/Full Description
+    const shortDesc = p.shortDescription || p.description || '';
+    const fullDesc = p.fullDescription || (shortDesc ? `${shortDesc} Crafted with premium attention to detail, this product coordinates effortlessly with our editorial, warm boutique aesthetic to elevate your everyday routines.` : '');
+
+    // 3. Category based specs
+    const categorySpecs = {
+      'Storage & Utility': { 'Material': 'Premium Virgin Polymer', 'Usage': 'Home Storage', 'Installation': 'Freestanding' },
+      'Kitchen & Dining': { 'Material': 'Food-Grade BPA-Free Acrylic', 'Usage': 'Dining & Kitchen', 'Installation': 'Freestanding' },
+      'Cleaning Essentials': { 'Material': 'Heavy-duty Polyurethane & Steel', 'Usage': 'Household Cleaning', 'Installation': 'Manual' },
+      'Bathroom Accessories': { 'Material': 'Curated Virgin Plastic', 'Usage': 'Bathroom Organizer', 'Installation': 'Adhesive Wall Mount / Freestanding' },
+      'Home & Garden': { 'Material': 'Weather-resistant Virgin Polymer', 'Usage': 'Garden & Outdoor', 'Installation': 'Freestanding' }
+    };
+    const specs = p.specifications || {
+      'Brand': 'Kalavathi Plastics',
+      'Origin': 'Made in India',
+      ...categorySpecs[p.category] || { 'Material': 'Premium Virgin Polymer', 'Usage': 'Multi-purpose' }
+    };
+
+    // 4. Colors
+    const categoryColors = {
+      'Storage & Utility': ['#F5F5DC', '#D2B48C', '#2F4F4F', '#8FBC8F'],
+      'Kitchen & Dining': ['#FFFFFF', '#F0E68C', '#E6E6FA', '#BC8F8F'],
+      'Cleaning Essentials': ['#2E8B57', '#4682B4', '#708090', '#F7F3EC'],
+      'Bathroom Accessories': ['#FFFFFF', '#FAF0E6', '#B0C4DE', '#5F9EA0'],
+      'Home & Garden': ['#556B2F', '#8B4513', '#A0522D', '#D8BFD8']
+    };
+    const colors = p.colors || categoryColors[p.category] || ['#FFFFFF', '#D2B48C'];
+
+    // 5. Sizes
+    const sizes = p.sizes || p.variants || ['Standard'];
+
+    // 6. Gallery Images
+    let galleryImages = p.images && Array.isArray(p.images) ? [...p.images] : [];
+    if (galleryImages.length === 0) {
+      galleryImages.push('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="300" height="300" fill="%23eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="%23777">No Image</text></svg>');
+    }
+    const baseImg = galleryImages[0];
+    while (galleryImages.length < 5) {
+      galleryImages.push(baseImg);
+    }
+
+    return {
+      ...p,
+      id: p.id,
+      slug: slug,
+      name: p.name,
+      category: p.category,
+      badge: p.badge || null,
+      shortDescription: shortDesc,
+      fullDescription: fullDesc,
+      features: p.features || [],
+      specifications: specs,
+      colors: colors,
+      sizes: sizes,
+      images: galleryImages,
+      thumbnail: p.thumbnail || baseImg,
+      whatsappMessage: p.whatsappMessage || `Hello, I'm interested in your wholesale product: ${p.name}. Please provide pricing and minimum order quantity (MOQ) details.`
+    };
+  },
+
   // Initialize client if credentials exist in localStorage
   init() {
     const isDisconnected = localStorage.getItem('supabaseDisconnected') === 'true';
@@ -105,7 +175,7 @@ const SupabaseDB = {
     
     if (!this.isConfigured || !this.client) {
       console.log('Using local storage products (Supabase not connected).');
-      return localProducts;
+      return localProducts.map(p => this.enrichProduct(p));
     }
 
     try {
@@ -145,14 +215,14 @@ const SupabaseDB = {
 
         // Cache products locally to support offline fallback
         localStorage.setItem('products', JSON.stringify(data));
-        return data;
+        return data.map(p => this.enrichProduct(p));
       } else {
         console.log('Supabase products table is empty. Falling back to local catalog.');
-        return localProducts;
+        return localProducts.map(p => this.enrichProduct(p));
       }
     } catch (err) {
       console.error('Error fetching products from Supabase, using local cache fallback:', err);
-      return localProducts;
+      return localProducts.map(p => this.enrichProduct(p));
     }
   },
 

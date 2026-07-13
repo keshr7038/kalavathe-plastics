@@ -680,7 +680,12 @@ if (productGrid) {
       if (product) {
         // Save scroll position before navigating
         sessionStorage.setItem('homeScrollPosition', window.scrollY);
-        window.location.href = `/products/${product.slug}`;
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('slug') || window.location.pathname.endsWith('index.html')) {
+          window.location.href = `/product.html?slug=${product.slug}`;
+        } else {
+          window.location.href = `/products/${product.slug}`;
+        }
       }
     }
   });

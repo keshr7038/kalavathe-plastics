@@ -72,9 +72,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   let slug = urlParams.get('slug');
   if (!slug) {
-    const parts = window.location.pathname.split('/');
-    if (parts[1] === 'products' && parts[2]) {
-      slug = parts[2];
+    const pathParts = window.location.pathname.split('/');
+    const prodIndex = pathParts.indexOf('products');
+    if (prodIndex !== -1 && pathParts[prodIndex + 1]) {
+      slug = pathParts[prodIndex + 1];
     }
   }
 
@@ -82,14 +83,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     activeProduct = PRODUCTS.find(p => p.slug === slug || p.id === slug);
   }
 
-  // Fallback to first product if not found
-  if (!activeProduct && PRODUCTS.length > 0) {
-    activeProduct = PRODUCTS[0];
-  }
-
   if (activeProduct) {
     renderProductDetails(activeProduct);
     renderRelatedProducts(activeProduct);
+  } else {
+    showProductNotFound();
   }
 
   // 4. Attach common header/footer listeners
@@ -325,7 +323,33 @@ function renderRelatedProducts(product) {
 function navigateToProduct(slug) {
   // Preserves scroll coordinates in sessionStorage before leaving page
   sessionStorage.setItem('homeScrollPosition', window.scrollY);
-  window.location.href = `/products/${slug}`;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('slug') || window.location.pathname.endsWith('product.html')) {
+    window.location.href = `/product.html?slug=${slug}`;
+  } else {
+    window.location.href = `/products/${slug}`;
+  }
+}
+
+function showProductNotFound() {
+  const mainContainer = document.querySelector('main.container');
+  if (mainContainer) {
+    mainContainer.innerHTML = `
+      <div class="product-not-found" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 55vh; text-align: center; padding: 3rem 1.5rem; background: rgba(255, 255, 255, 0.5); border: 1px solid var(--color-divider); border-radius: 24px; margin: 4rem 0; box-shadow: 0 15px 40px rgba(0,0,0,0.02);">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5" style="margin-bottom: 1.5rem;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--color-primary-text); margin-bottom: 1rem; font-family: var(--font-heading);">Product Not Found</h2>
+        <p style="color: var(--color-secondary-text); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 480px; line-height: 1.6; font-family: var(--font-body);">We couldn't find the product you were looking for. It may have been renamed, moved, or deleted.</p>
+        <a href="/" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 0.8rem 2rem; height: auto;">Return to Home / Shop</a>
+      </div>
+    `;
+  }
+  
+  // Set clean SEO title and meta for error state
+  document.title = 'Product Not Found | Kalavathi Plastics';
 }
 
 // --- UTILITY: META UPDATES ---
