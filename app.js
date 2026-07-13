@@ -1,271 +1,10 @@
 // --- PRODUCTS DATA ---
-const PRODUCTS = [
-  // Storage & Utility
-  {
-    id: 'su1',
-    name: 'Buckets & Tubs',
-    category: 'Storage & Utility',
-    description: 'Heavy duty plastic buckets and utility tubs, ideal for household chores and construction uses.',
-    badge: 'Multiple Sizes Available',
-    variants: ['5L', '10L', '15L', '20L'],
-    features: ['✓ Reinforced rim', '✓ Heavy duty load capacity', '✓ UV-stabilized polymer', '✓ Sturdy metal handle'],
-    images: ['assets/products/bucket-tub-1.webp', 'assets/products/bucket-tub-2.webp', 'assets/products/bucket-tub-3.webp']
-  },
-  {
-    id: 'su2',
-    name: 'Storage Containers',
-    category: 'Storage & Utility',
-    description: 'Airtight food-safe storage containers in multiple shapes for organizing kitchen shelf goods.',
-    badge: 'Popular Choice',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Airtight locking lids', '✓ BPA-free material', '✓ Stackable space-saving design', '✓ Easy-to-clean body'],
-    images: ['assets/products/storage-container-1.webp', 'assets/products/storage-container-2.webp', 'assets/products/storage-container-3.webp']
-  },
-  {
-    id: 'su3',
-    name: 'Plastic Bags',
-    category: 'Storage & Utility',
-    description: 'Heavy-duty polymer packing bags, perfect for agricultural packaging and commercial stores.',
-    badge: 'Wholesale Product',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ High tensile strength', '✓ Leakproof seams', '✓ Food-grade LDPE material', '✓ Dust & moisture barrier'],
-    images: ['assets/products/plastic-bag-1.webp', 'assets/products/plastic-bag-2.webp', 'assets/products/plastic-bag-3.webp']
-  },
-  {
-    id: 'su4',
-    name: 'Carry Bags',
-    category: 'Storage & Utility',
-    description: 'Eco-friendly recyclable plastic carry bags with soft loops, perfect for retail grocery shops.',
-    badge: 'Bulk Orders Available',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Ergonomic handles', '✓ Heavy weight capacity', '✓ Eco-friendly recyclable', '✓ Durable heat welds'],
-    images: ['assets/products/carry-bag-1.webp', 'assets/products/carry-bag-2.webp', 'assets/products/carry-bag-3.webp']
-  },
-  {
-    id: 'su5',
-    name: 'Plastic Baskets',
-    category: 'Storage & Utility',
-    description: 'Multi-purpose ventilated storage baskets with smooth handles for home storage and shopping.',
-    badge: 'Wholesale Product',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Open weave airflow', '✓ Durable comfort handles', '✓ Flexible polymer mesh', '✓ Stackable structure'],
-    images: ['assets/products/plastic-basket-1.webp', 'assets/products/plastic-basket-2.webp', 'assets/products/plastic-basket-3.webp']
-  },
-  // Kitchen & Dining
-  {
-    id: 'kd1',
-    name: 'Water Bottles',
-    category: 'Kitchen & Dining',
-    description: 'Leakproof eco-friendly PET water bottles. Perfect for gyms, schools, and refrigerators.',
-    badge: 'Best Seller',
-    variants: ['500ml', '750ml', '1L', '2L'],
-    features: ['✓ Leakproof snap cap', '✓ Virgin PET material', '✓ Ergonomic grip structure', '✓ Odorless & BPA-free'],
-    images: ['assets/products/water-bottle-1.webp', 'assets/products/water-bottle-2.webp', 'assets/products/water-bottle-3.webp']
-  },
-  {
-    id: 'kd2',
-    name: 'Lunch Boxes',
-    category: 'Kitchen & Dining',
-    description: 'Multi-tier leakproof lunch boxes with thermal insulation compartments. Microwave safe.',
-    badge: 'Popular Choice',
-    variants: ['Single Tier', '2-Tier', '3-Tier'],
-    features: ['✓ Thermal insulation', '✓ Microwave safe base', '✓ Leakproof clip seals', '✓ Divider trays included'],
-    images: ['assets/products/lunch-box-1.webp', 'assets/products/lunch-box-2.webp', 'assets/products/lunch-box-3.webp']
-  },
-  {
-    id: 'kd3',
-    name: 'Bread Boxes',
-    category: 'Kitchen & Dining',
-    description: 'Countertop bread storage boxes with sliding lids to preserve baked goods freshness.',
-    badge: 'Wholesale Product',
-    variants: ['Standard', 'Large'],
-    features: ['✓ Moisture-lock seal', '✓ Easy-access slide lid', '✓ Durable BPA-free poly', '✓ Non-slip bottom pads'],
-    images: ['assets/products/bread-box-1.webp', 'assets/products/bread-box-2.webp', 'assets/products/bread-box-3.webp']
-  },
-  {
-    id: 'kd4',
-    name: 'Plates',
-    category: 'Kitchen & Dining',
-    description: 'Unbreakable lightweight polymer dining plates with a scratch-resistant matte finish.',
-    badge: 'Bulk Orders Available',
-    variants: ['6-inch', '8-inch', '10-inch', '12-inch'],
-    features: ['✓ Unbreakable premium polymer', '✓ Scratch-resistant matte finish', '✓ Dishwasher safe base', '✓ Food-safe virgin plastic'],
-    images: ['assets/products/plates-1.webp', 'assets/products/plates-2.webp', 'assets/products/plates-3.webp']
-  },
-  {
-    id: 'kd5',
-    name: 'Trays',
-    category: 'Kitchen & Dining',
-    description: 'Non-slip restaurant serving trays with ribbed bases and reinforced carry edges.',
-    badge: 'Wholesale Product',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Non-slip ribbed base', '✓ Reinforced carry edges', '✓ Heat resistant polymer', '✓ Stackable for storage'],
-    images: ['assets/products/tray-1.webp', 'assets/products/tray-2.webp', 'assets/products/tray-3.webp']
-  },
-  {
-    id: 'kd6',
-    name: 'Juicers',
-    category: 'Kitchen & Dining',
-    description: 'Manual press citrus juicers with high-yield squeeze cones and integrated seed strainers.',
-    badge: 'Popular Choice',
-    variants: ['Manual Small', 'Manual Large'],
-    features: ['✓ High-yield press cone', '✓ Integrated seed strainer', '✓ Easy to clean parts', '✓ Non-drip pour spout'],
-    images: ['assets/products/juicer-1.webp', 'assets/products/juicer-2.webp', 'assets/products/juicer-3.webp']
-  },
-  // Cleaning Essentials
-  {
-    id: 'ce1',
-    name: 'Cleaning Mops',
-    category: 'Cleaning Essentials',
-    description: '360-degree rotating microfiber mops with telescopic steel handles for easy wet/dry floor scrub.',
-    badge: 'Best Seller',
-    variants: ['Standard', 'Heavy Duty'],
-    features: ['✓ 360-degree rotating head', '✓ Telescopic steel handle', '✓ Super absorbent microfiber', '✓ Splash guard bucket fit'],
-    images: ['assets/products/cleaning-mop-1.webp', 'assets/products/cleaning-mop-2.webp', 'assets/products/cleaning-mop-3.webp']
-  },
-  {
-    id: 'ce2',
-    name: 'Brooms',
-    category: 'Cleaning Essentials',
-    description: 'Heavy duty high-density bristle sweeping brooms with long handles for home and commercial cleaning.',
-    badge: 'Wholesale Product',
-    variants: ['Soft Bristle', 'Hard Bristle'],
-    features: ['✓ High-density sweeps', '✓ Extra wide sweep head', '✓ Comfort grip long handle', '✓ Split-end bristles for dust'],
-    images: ['assets/products/broom-1.webp', 'assets/products/broom-2.webp', 'assets/products/broom-3.webp']
-  },
-  {
-    id: 'ce3',
-    name: 'Cleaning Brushes',
-    category: 'Cleaning Essentials',
-    description: 'Ergonomic hand-held scrubbing brushes with stiff wear-resistant fibers for heavy-duty stains.',
-    badge: 'Bulk Orders Available',
-    variants: ['Soft Grip', 'Hard Scrub'],
-    features: ['✓ Durable scrub bristles', '✓ Ergonomic hand grip', '✓ Wear-resistant fibers', '✓ Multi-surface suitable'],
-    images: ['assets/products/cleaning-brush-1.webp', 'assets/products/cleaning-brush-2.webp', 'assets/products/cleaning-brush-3.webp']
-  },
-  {
-    id: 'ce4',
-    name: 'Washroom Brushes',
-    category: 'Cleaning Essentials',
-    description: 'Curved rim scrubber washroom brushes with floor storage containers. Anti-bacterial bristles.',
-    badge: 'Popular Choice',
-    variants: ['Standard', 'Double-Sided'],
-    features: ['✓ Curved rim scrub head', '✓ Wall-mountable holder include', '✓ Heavy duty scrubbing fibers', '✓ Quick-dry ventilated cup'],
-    images: ['assets/products/washroom-brush-1.webp', 'assets/products/washroom-brush-2.webp', 'assets/products/washroom-brush-3.webp']
-  },
-  {
-    id: 'ce5',
-    name: 'Dustbins',
-    category: 'Cleaning Essentials',
-    description: 'Hands-free foot pedal dustbins with odor-seal clamping lids. Includes removable inner buckets.',
-    badge: 'Multiple Sizes Available',
-    variants: ['10L', '20L', '30L'],
-    features: ['✓ Hands-free foot pedal', '✓ Odor-seal clamping lid', '✓ Removable inner bucket', '✓ Heavy-duty pedal hinge'],
-    images: ['assets/products/dustbin-1.webp', 'assets/products/dustbin-2.webp', 'assets/products/dustbin-3.webp']
-  },
-  // Bathroom Accessories
-  {
-    id: 'ba1',
-    name: 'Soap Holders',
-    category: 'Bathroom Accessories',
-    description: 'Slotted self-draining wall soap holders with adhesive pads. Durable polymer body.',
-    badge: 'Wholesale Product',
-    variants: ['Wall-Mount', 'Suction Cup'],
-    features: ['✓ Self-draining slotted base', '✓ Strong suction adhesion', '✓ Rust-proof ABS polymer', '✓ Sleek chrome accents'],
-    images: ['assets/products/soap-holder-1.webp', 'assets/products/soap-holder-2.webp', 'assets/products/soap-holder-3.webp']
-  },
-  {
-    id: 'ba2',
-    name: 'Soap Cases',
-    category: 'Bathroom Accessories',
-    description: 'Travel soap cases with snaps and internal draining racks to keep soap bars dry on the go.',
-    badge: 'Popular Choice',
-    variants: ['Standard Travel', 'Large Soap'],
-    features: ['✓ Tight snap travel lid', '✓ Double-deck dry tray', '✓ Compact heavy duty design', '✓ Rounded corners'],
-    images: ['assets/products/soap-case-1.webp', 'assets/products/soap-case-2.webp', 'assets/products/soap-case-3.webp']
-  },
-  {
-    id: 'ba3',
-    name: 'Toothbrush Holders',
-    category: 'Bathroom Accessories',
-    description: 'Multi-slot toothbrush and paste holder wall shelf with dustproof cover lid.',
-    badge: 'Wholesale Product',
-    variants: ['Standard', 'Family Pack'],
-    features: ['✓ Multi-slot organizer head', '✓ Dustproof protective lid', '✓ Wall-mount tape included', '✓ Drainage ventilation'],
-    images: ['assets/products/toothbrush-holder-1.webp', 'assets/products/toothbrush-holder-2.webp', 'assets/products/toothbrush-holder-3.webp']
-  },
-  {
-    id: 'ba4',
-    name: 'Mirrors',
-    category: 'Bathroom Accessories',
-    description: 'HD distortion-free wall mirror with moisture-resistant backing frame. Oval and rectangular shapes.',
-    badge: 'Best Seller',
-    variants: ['Small Oval', 'Medium Rect', 'Large Deluxe'],
-    features: ['✓ HD reflection plate', '✓ Reinforced wall frame', '✓ Damp-proof anti-fog backing', '✓ Lightweight mounting'],
-    images: ['assets/products/mirror-1.webp', 'assets/products/mirror-2.webp', 'assets/products/mirror-3.webp']
-  },
-  // Home & Garden
-  {
-    id: 'hg1',
-    name: 'Plastic Stools',
-    category: 'Home & Garden',
-    description: 'Compact stackable polymer stools with anti-skid bottom rubber pads. Supports high weight loads.',
-    badge: 'Best Seller',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Anti-skid rubber base pads', '✓ Heavy load polymer ribbing', '✓ Stackable space-saving frame', '✓ Ventilation hole design'],
-    images: ['assets/products/plastic-stool-1.webp', 'assets/products/plastic-stool-2.webp', 'assets/products/plastic-stool-3.webp']
-  },
-  {
-    id: 'hg2',
-    name: 'Mats',
-    category: 'Home & Garden',
-    description: 'Stain-resistant poly mat rolls, easy to clean. Perfect for floor seating and large events.',
-    badge: 'Wholesale Product',
-    variants: ['4x6 ft', '6x9 ft'],
-    features: ['✓ Washable polypropylene weave', '✓ Water & stain resistant', '✓ Reversible elegant pattern', '✓ Lightweight folding design'],
-    images: ['assets/products/mat-1.webp', 'assets/products/mat-2.webp', 'assets/products/mat-3.webp']
-  },
-  {
-    id: 'hg3',
-    name: 'Door Mats',
-    category: 'Home & Garden',
-    description: 'High-scraping coarse door mats with non-slip heavy-duty rubber backings for home entryways.',
-    badge: 'Popular Choice',
-    variants: ['Standard Door', 'Large Welcome'],
-    features: ['✓ High-scrape coir design', '✓ Heavy duty rubber bottom', '✓ Mud & dust trapper mesh', '✓ Stain-proof poly fibers'],
-    images: ['assets/products/door-mat-1.webp', 'assets/products/door-mat-2.webp', 'assets/products/door-mat-3.webp']
-  },
-  {
-    id: 'hg4',
-    name: 'Plastic Pots',
-    category: 'Home & Garden',
-    description: 'Lightweight crack-proof garden flower pots with bottom drainage and UV-resistant outdoor coating.',
-    badge: 'Multiple Sizes Available',
-    variants: ['Small', 'Medium', 'Large'],
-    features: ['✓ Bottom drainage outlets', '✓ UV-resistant outdoor colors', '✓ Lightweight crack-proof body', '✓ Rolled rim carry support'],
-    images: ['assets/products/plastic-pot-1.webp', 'assets/products/plastic-pot-2.webp', 'assets/products/plastic-pot-3.webp']
-  },
-  {
-    id: 'hg5',
-    name: 'Shoe Racks',
-    category: 'Home & Garden',
-    description: 'Washable modular shoe racks, easy assembly without tools. Open airflow frame.',
-    badge: 'Bulk Orders Available',
-    variants: ['3-Tier', '4-Tier', '5-Tier'],
-    features: ['✓ Easy snap-together assembly', '✓ Washable ventilated shelves', '✓ Lightweight sturdy structure', '✓ Modular expandable layout'],
-    images: ['assets/products/shoe-rack-1.webp', 'assets/products/shoe-rack-2.webp', 'assets/products/shoe-rack-3.webp']
-  },
-  {
-    id: 'hg6',
-    name: 'Water Cans',
-    category: 'Home & Garden',
-    description: 'Long-spout outdoor garden watering cans with dual ergonomic handles for balanced pouring.',
-    badge: 'Popular Choice',
-    variants: ['5L', '10L'],
-    features: ['✓ Extra long watering spout', '✓ Ergonomic dual-handle grip', '✓ Heavy-duty blow-molded poly', '✓ Removable sprinkler rose rose'],
-    images: ['assets/products/water-can-1.webp', 'assets/products/water-can-2.webp', 'assets/products/water-can-3.webp']
-  }
-];
+// DEFAULT_PRODUCTS is loaded globally from products-data.js
+
+let PRODUCTS = JSON.parse(localStorage.getItem('products')) || DEFAULT_PRODUCTS;
+if (!localStorage.getItem('products')) {
+  localStorage.setItem('products', JSON.stringify(DEFAULT_PRODUCTS));
+}
 
 // --- APP STATE ---
 let inquiryCart = [];
@@ -274,9 +13,9 @@ let currentModalQty = 1;
 let selectedVariant = "";
 
 // --- ELEMENTS ---
-const catalogGrid = document.getElementById('catalog-grid');
-const featuredGrid = document.getElementById('featured-grid');
-const searchInput = document.getElementById('search-catalog');
+const productGrid = document.getElementById('product-grid');
+
+const searchInput = document.getElementById('search-product');
 const searchSuggestions = document.getElementById('search-suggestions');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const cartCountBadge = document.querySelector('.cart-count');
@@ -306,12 +45,12 @@ const modalQtyVal = document.getElementById('modal-qty-val');
 const modalQtyDec = document.getElementById('modal-qty-dec');
 const modalQtyInc = document.getElementById('modal-qty-inc');
 
-// --- INITIALIZE CATALOG ---
+// --- INITIALIZE PRODUCTS ---
 // --- PREMIUM VECTOR SVG FALLBACKS ---
 function getProductFallbackSVG(productName) {
   let svgInner = '';
   switch (productName) {
-    case 'Buckets & Tubs':
+    case 'Buckets':
       svgInner = `<ellipse cx="12" cy="7" rx="8" ry="2" />
                   <path d="M4 7l2 12c.3 1.8 1.8 3 3.6 3h4.8c1.8 0 3.3-1.2 3.6-3l2-12" />
                   <path d="M4 7C4 3.5 7.5 2 12 2s8 1.5 8 5" stroke-dasharray="1 1" stroke="var(--color-accent)" />`;
@@ -324,20 +63,11 @@ function getProductFallbackSVG(productName) {
                   <line x1="12" y1="12" x2="12" y2="16" />
                   <line x1="16" y1="12" x2="16" y2="16" />`;
       break;
-    case 'Plastic Bags':
-      svgInner = `<path d="M6 3h12l2 4v14H4V7l2-4z" />
-                  <rect x="9" y="5" width="6" height="3" rx="1" />
-                  <path d="M4 11h16M4 15h16" stroke-dasharray="2 2" stroke="var(--color-accent)" />`;
-      break;
-    case 'Carry Bags':
-      svgInner = `<rect x="4" y="8" width="16" height="13" rx="2" />
-                  <path d="M8 8V5c0-1.7 1.3-3 3-3h2c1.7 0 3 1.3 3 3v3" stroke="var(--color-accent)" />
-                  <line x1="8" y1="13" x2="16" y2="13" />`;
-      break;
-    case 'Plastic Baskets':
-      svgInner = `<ellipse cx="12" cy="6" rx="9" ry="2" />
-                  <path d="M3.5 6.5l2 12c.2 1.3 1.3 2.5 2.7 2.5h7.6c1.4 0 2.5-1.2 2.7-2.5l2-12" />
-                  <path d="M6 9h12M5.5 12h13M5 15h14M8 6.5v12M12 6v13M16 6.5v12" stroke-width="1" stroke="rgba(24, 42, 58, 0.4)" />`;
+
+    case 'Water Tubs':
+      svgInner = `<ellipse cx="12" cy="7" rx="9" ry="2.5" />
+                  <path d="M3 7l2 11c.2 1.5 1.5 3 3.2 3h7.6c1.7 0 3-1.5 3.2-3l2-11" />
+                  <path d="M2 7h20" stroke="var(--color-accent)" stroke-width="1.5" />`;
       break;
     case 'Water Bottles':
       svgInner = `<rect x="10" y="2" width="4" height="2" rx="0.5" fill="var(--color-accent)" />
@@ -498,13 +228,13 @@ function handleProductImageError(imgEl, productId, productName, type) {
   }
 }
 
-// --- INITIALIZE CATALOG ---
-function renderCatalog(items) {
-  if (!catalogGrid) return;
-  catalogGrid.innerHTML = '';
+// --- INITIALIZE PRODUCTS ---
+function renderProducts(items) {
+  if (!productGrid) return;
+  productGrid.innerHTML = '';
   
   if (items.length === 0) {
-    catalogGrid.innerHTML = `
+    productGrid.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--color-secondary-text);">
         <p>No products match your search. Try resetting your search filter.</p>
       </div>
@@ -538,50 +268,14 @@ function renderCatalog(items) {
         </div>
       </div>
     `;
-    catalogGrid.appendChild(card);
+    productGrid.appendChild(card);
   });
   
   // Refresh intersection observers
   setTimeout(initScrollReveal, 50);
 }
 
-// --- RENDER FEATURED SECTION ---
-function renderFeaturedSection() {
-  if (!featuredGrid) return;
-  featuredGrid.innerHTML = '';
-  
-  const featuredNames = ["Buckets & Tubs", "Water Bottles", "Plastic Baskets", "Dustbins", "Plastic Pots"];
-  const featuredItems = PRODUCTS.filter(prod => featuredNames.includes(prod.name));
-  
-  featuredItems.forEach(product => {
-    const card = document.createElement('div');
-    card.className = 'product-card featured-card reveal';
-    card.dataset.id = product.id;
-    card.innerHTML = `
-      <div class="product-image-container" style="cursor: pointer;" id="img-container-feat-${product.id}">
-        <span class="product-badge">${product.badge}</span>
-        <div class="skeleton-shimmer" id="skel-feat-${product.id}"></div>
-        <img class="product-image" src="${product.images[0]}" alt="${product.name}" loading="lazy" 
-             onload="document.getElementById('skel-feat-${product.id}').style.display='none'; this.classList.add('loaded');"
-             onerror="handleProductImageError(this, '${product.id}', '${product.name}', 'featured');">
-      </div>
-      <div class="product-details">
-        <h3 class="product-title" style="cursor: pointer;">${product.name}</h3>
-        <p class="product-desc" style="font-size: 0.9rem; cursor: pointer;">${product.description}</p>
-        <div class="product-footer">
-          <div class="product-price-info">
-            <span class="price-label">Wholesale status</span>
-            <span class="price-range" style="font-size: 0.95rem; font-weight: 700; color: var(--color-accent);">Contact for Price</span>
-          </div>
-          <button class="btn-add-inquiry" data-id="${product.id}" title="Add to Inquiry">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          </button>
-        </div>
-      </div>
-    `;
-    featuredGrid.appendChild(card);
-  });
-}
+
 
 // --- FILTER & SEARCH ---
 function handleFilterAndSearch() {
@@ -594,7 +288,7 @@ function handleFilterAndSearch() {
     return matchesSearch && matchesFilter;
   });
 
-  renderCatalog(filtered);
+  renderProducts(filtered);
 }
 
 if (searchInput) {
@@ -911,12 +605,22 @@ function openDrawer() {
   if (cartDrawer) cartDrawer.classList.add('open');
   if (cartOverlay) cartOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  
+  const noticeBanner = document.getElementById('delivery-notice-banner');
+  if (noticeBanner) {
+    noticeBanner.classList.add('dismissed');
+  }
 }
 
 function closeDrawer() {
   if (cartDrawer) cartDrawer.classList.remove('open');
   if (cartOverlay) cartOverlay.classList.remove('open');
   document.body.style.overflow = '';
+  
+  const noticeBanner = document.getElementById('delivery-notice-banner');
+  if (noticeBanner && sessionStorage.getItem('deliveryNoticeDismissed') !== 'true') {
+    noticeBanner.classList.remove('dismissed');
+  }
 }
 
 if (cartToggle) cartToggle.addEventListener('click', openDrawer);
@@ -938,9 +642,9 @@ if (cartItemsContainer) {
   });
 }
 
-// Catalog delegation (click card to open modal, click plus to add directly)
-if (catalogGrid) {
-  catalogGrid.addEventListener('click', (e) => {
+// Product delegation (click card to open modal, click plus to add directly)
+if (productGrid) {
+  productGrid.addEventListener('click', (e) => {
     const addBtn = e.target.closest('.btn-add-inquiry');
     if (addBtn) {
       e.stopPropagation();
@@ -954,21 +658,7 @@ if (catalogGrid) {
   });
 }
 
-// Featured Section delegation
-if (featuredGrid) {
-  featuredGrid.addEventListener('click', (e) => {
-    const addBtn = e.target.closest('.btn-add-inquiry');
-    if (addBtn) {
-      e.stopPropagation();
-      addToInquiry(addBtn.dataset.id);
-      return;
-    }
-    const card = e.target.closest('.product-card');
-    if (card) {
-      openProductModal(card.dataset.id);
-    }
-  });
-}
+
 
 // --- WHATSAPP INQUIRY REDIRECT ---
 if (sendWhatsAppBtn) {
@@ -988,6 +678,25 @@ if (sendWhatsAppBtn) {
     message += `✓ Minimum Order Quantity\n`;
     message += `✓ Delivery Information\n\n`;
     message += `Thank You.`;
+
+    // Record inquiry click analytics via Supabase (or local fallback)
+    try {
+      const notesField = document.getElementById('client-notes');
+      const inquiryRecord = {
+        timestamp: new Date().toISOString(),
+        items: inquiryCart.map(item => ({ title: item.title, quantity: item.quantity })),
+        notes: notesField ? notesField.value : ""
+      };
+      if (typeof SupabaseDB !== 'undefined') {
+        SupabaseDB.logInquiry(inquiryRecord);
+      } else {
+        let inquiries = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+        inquiries.push(inquiryRecord);
+        localStorage.setItem('whatsappInquiries', JSON.stringify(inquiries));
+      }
+    } catch (e) {
+      console.error('Error saving inquiry log:', e);
+    }
 
     const encodedMessage = encodeURIComponent(message);
     const phoneNumber = '919966089248'; // Verified business phone
@@ -1124,11 +833,31 @@ function initActiveNavLinks() {
   });
 }
 
+function initFloatingNotice() {
+  const noticeBanner = document.getElementById('delivery-notice-banner');
+  const closeNoticeBtn = document.getElementById('close-notice-btn');
+  localStorage.removeItem('deliveryNoticeDismissed');
+  
+  if (noticeBanner && closeNoticeBtn) {
+    closeNoticeBtn.addEventListener('click', () => {
+      noticeBanner.classList.add('dismissed');
+      sessionStorage.setItem('deliveryNoticeDismissed', 'true');
+    });
+    if (sessionStorage.getItem('deliveryNoticeDismissed') === 'true') {
+      noticeBanner.classList.add('dismissed');
+    }
+  }
+}
+
 // --- BOOTSTRAP ---
-document.addEventListener('DOMContentLoaded', () => {
-  renderFeaturedSection();
-  renderCatalog(PRODUCTS);
+document.addEventListener('DOMContentLoaded', async () => {
+  // Load products from Supabase cloud (or local fallback)
+  if (typeof SupabaseDB !== 'undefined') {
+    PRODUCTS = await SupabaseDB.fetchProducts();
+  }
+  renderProducts(PRODUCTS);
   initStatsAnimation();
   initTimelineAnimation();
   initActiveNavLinks();
+  initFloatingNotice();
 });

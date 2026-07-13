@@ -20,7 +20,7 @@
       <nav class="nav-links-wrapper">
         <ul class="nav-links">
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#products">Products</a></li>
           <li><a href="#why-us">Why Us</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -50,7 +50,7 @@
           From household essentials to industrial plastic solutions, serving retailers, businesses, and bulk buyers with quality products and dependable supply.
         </p>
         <div class="hero-actions">
-          <a href="#catalog" class="btn btn-primary">Explore Products</a>
+          <a href="#products" class="btn btn-primary">Explore Products</a>
         </div>
       </div>
       <div class="hero-visual reveal">
@@ -95,7 +95,7 @@
     <div class="container stats-grid">
       <div class="stat-card">
         <div class="stat-number" id="stat-delivered" data-target="5000">0+</div>
-        <div class="stat-label">Products Delivered</div>
+        <div class="stat-label">Products Sold</div>
       </div>
       <div class="stat-card">
         <div class="stat-number" id="stat-retailers" data-target="1000">0+</div>
@@ -105,36 +105,25 @@
         <div class="stat-number" id="stat-exp" data-target="15">0+</div>
         <div class="stat-label">Years Experience</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number" id="stat-quality" data-target="100">0%</div>
-        <div class="stat-label">Quality Assurance</div>
-      </div>
     </div>
   </section>
 
   <!-- PRODUCT SHOWCASE -->
-  <section id="catalog" class="section-padding">
+  <section id="products" class="section-padding">
     <div class="container">
-      <div class="catalog-header reveal">
-        <span class="badge">Premium Catalog</span>
+      <div class="product-header reveal">
+        <span class="badge">Premium Products</span>
         <h2>Explore Collections</h2>
         <p>Use filters or search to browse high-grade polymer options. Add items to your inquiry list for direct WhatsApp quotation.</p>
       </div>
 
-      <!-- FEATURED PRODUCTS SECTION -->
-      <div class="featured-section reveal" style="margin-bottom: 5rem;">
-        <h3 class="featured-section-title" style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 800; color: var(--color-primary-text); margin-bottom: 2rem; border-bottom: 2px solid var(--color-divider); padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">Featured B2B Items</h3>
-        <div id="featured-grid" class="featured-grid">
-          <!-- Rendered via JS -->
-        </div>
-      </div>
 
-      <div class="catalog-controls reveal">
+      <div class="product-controls reveal">
         <div class="search-box">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="search-catalog" placeholder="Search products (e.g. storage containers, mops)..." autocomplete="off">
+          <input type="text" id="search-product" placeholder="Search products (e.g. storage containers, mops)..." autocomplete="off">
           <div id="search-suggestions" class="search-suggestions-dropdown"></div>
         </div>
         <div class="filter-tabs">
@@ -147,7 +136,7 @@
         </div>
       </div>
 
-      <div id="catalog-grid" class="catalog-grid">
+      <div id="product-grid" class="product-grid">
         <!-- Dynamically Rendered via JS -->
       </div>
     </div>
@@ -156,7 +145,7 @@
   <!-- WHY CHOOSE US -->
   <section id="why-us" class="why-us section-padding">
     <div class="container">
-      <div class="catalog-header reveal">
+      <div class="product-header reveal">
         <span class="badge">Our Standards</span>
         <h2>Why Retailers Choose Kalavathe</h2>
         <p>Leading Kadapa with consistent polymer grade distribution, fair trade wholesale prices, and local reliability.</p>
@@ -212,10 +201,10 @@
   <!-- PROCESS TIMELINE -->
   <section id="process" class="section-padding">
     <div class="container">
-      <div class="catalog-header reveal">
+      <div class="product-header reveal">
         <span class="badge">Methodical Workflow</span>
         <h2>How We Partner With You</h2>
-        <p>Our ordering process is designed to save time, providing frictionless digital catalog selections and direct supplier chat.</p>
+        <p>Our ordering process is designed to save time, providing frictionless digital product selections and direct supplier chat.</p>
       </div>
 
       <div class="timeline-container reveal">
@@ -226,7 +215,7 @@
           <div class="timeline-step">
             <div class="timeline-node">1</div>
             <div class="timeline-title">Browse Products</div>
-            <div class="timeline-desc">Filter catalog items based on your needs.</div>
+            <div class="timeline-desc">Filter product items based on your needs.</div>
           </div>
           <div class="timeline-step">
             <div class="timeline-node">2</div>
@@ -261,7 +250,7 @@
   <!-- PREMIUM TESTIMONIALS -->
   <section id="testimonials" class="section-padding">
     <div class="container">
-      <div class="catalog-header reveal">
+      <div class="product-header reveal">
         <span class="badge">Reviews</span>
         <h2>Partnering For Shared Success</h2>
         <p>Hear from local retail store owners, construction contractors, and packaging distributors who purchase in bulk.</p>
@@ -305,7 +294,7 @@
   <!-- CONTACT & DIRECTIONS -->
   <section id="contact" class="section-padding" style="background-color: var(--color-bg-alt);">
     <div class="container">
-      <div class="catalog-header reveal">
+      <div class="product-header reveal">
         <span class="badge">Locate Us</span>
         <h2>Reach Our Kadapa Shop</h2>
         <p>Walk in to browse items in our warehouse or connect digitally. We are situated in the center of NGO Colony.</p>
@@ -375,6 +364,11 @@
     </div>
 
     <div class="drawer-footer">
+      <!-- NON-DISMISSIBLE DELIVERY NOTICE -->
+      <div class="drawer-notice-banner">
+        <span class="notice-icon">⚠️</span>
+        <span class="notice-text">No Online Delivery</span>
+      </div>
       <div class="cart-summary">
         <span>Inquiry Count:</span>
         <span id="cart-count-summary">0 Items</span>
@@ -394,8 +388,8 @@
   <footer>
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a href="#" class="logo" style="color: white;">
-          <span class="logo-icon" style="background: linear-gradient(135deg, var(--color-accent), var(--color-dark-tan)); color: var(--color-primary);">K</span>
+        <a href="#" class="logo" style="color: var(--color-primary-blue);">
+          <span class="logo-icon" style="background: linear-gradient(135deg, var(--color-accent), var(--color-primary-blue)); color: #FFFFFF;">K</span>
           <span>KALAVATHE <span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span></span>
         </a>
         <p>Kadapa's premium commercial polymer distributor. Providing reliability, custom logistics, and wholesale supplies since 2011.</p>
@@ -403,11 +397,11 @@
       <div class="footer-links">
         <h4>Product Groups</h4>
         <ul>
-          <li><a href="#catalog">Household Plastics</a></li>
-          <li><a href="#catalog">Premium Bistro Furniture</a></li>
-          <li><a href="#catalog">LDPE & Heavy Packaging</a></li>
-          <li><a href="#catalog">Water Storage Units</a></li>
-          <li><a href="#catalog">IS-Certified PVC Hoses</a></li>
+          <li><a href="#products">Household Plastics</a></li>
+          <li><a href="#products">Premium Bistro Furniture</a></li>
+          <li><a href="#products">LDPE & Heavy Packaging</a></li>
+          <li><a href="#products">Water Storage Units</a></li>
+          <li><a href="#products">IS-Certified PVC Hoses</a></li>
         </ul>
       </div>
       <div class="footer-contact">
@@ -420,7 +414,11 @@
       </div>
     </div>
     <div class="container footer-bottom">
-      <p>&copy; 2026 Kalavathe Plastics. All rights reserved. Designed for local enterprise.</p>
+      <p>&copy; 2026 Kalavathe Plastics. All rights reserved. Designed for local enterprise.
+        <a href="admin.html" class="admin-lock-link" aria-label="Admin Login" title="Owner Access Only">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 6px; opacity: 0.6; transition: opacity 0.2s ease;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </a>
+      </p>
       <div class="footer-badges">
         <span class="footer-badge">GSTIN: 37BUNPR9190J1ZM</span>
         <span class="footer-badge">Composition Scheme</span>
@@ -491,6 +489,23 @@
     </div>
   </div>
 
+  <!-- FLOATING NOTICE BANNER -->
+  <div id="delivery-notice-banner" class="floating-notice-banner">
+    <div class="notice-content">
+      <span class="notice-icon">⚠️</span>
+      <span class="notice-text">No Online Delivery</span>
+    </div>
+    <button id="close-notice-btn" class="close-notice-btn" aria-label="Dismiss Notice">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <script src="products-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-db.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
