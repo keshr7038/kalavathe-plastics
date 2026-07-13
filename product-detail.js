@@ -104,7 +104,7 @@ function renderProductDetails(product) {
   updateMetaTag('name', 'description', product.shortDescription || product.description);
   updateMetaTag('property', 'og:title', `${product.name} | Kalavathi Plastics`);
   updateMetaTag('property', 'og:description', product.shortDescription || product.description);
-  updateMetaTag('property', 'og:image', product.thumbnail || (product.images && product.images[0]) || '');
+  updateMetaTag('property', 'og:image', getAbsoluteAssetPath(product.thumbnail || (product.images && product.images[0]) || ''));
   updateMetaTag('property', 'og:url', window.location.href);
 
   // Breadcrumbs
@@ -202,7 +202,7 @@ function renderProductDetails(product) {
   if (product.images && product.images.length > 0) {
     const mainImg = product.images[0];
     if (detailMainImage) {
-      detailMainImage.src = mainImg;
+      detailMainImage.src = getAbsoluteAssetPath(mainImg);
       detailMainImage.onload = () => {
         if (detailImageSkeleton) detailImageSkeleton.style.display = 'none';
         detailMainImage.style.opacity = '1';
@@ -211,8 +211,8 @@ function renderProductDetails(product) {
 
     if (detailThumbnails) {
       detailThumbnails.innerHTML = product.images.map((imgUrl, idx) => `
-        <button class="thumbnail-button ${idx === 0 ? 'active' : ''}" data-img="${imgUrl}">
-          <img src="${imgUrl}" alt="Thumbnail View ${idx + 1}" onerror="this.parentElement.style.display='none';">
+        <button class="thumbnail-button ${idx === 0 ? 'active' : ''}" data-img="${getAbsoluteAssetPath(imgUrl)}">
+          <img src="${getAbsoluteAssetPath(imgUrl)}" alt="Thumbnail View ${idx + 1}" onerror="this.parentElement.style.display='none';">
         </button>
       `).join('');
 
@@ -281,7 +281,7 @@ function renderRelatedProducts(product) {
     card.dataset.id = item.id;
     card.dataset.slug = item.slug;
     
-    const mainImg = item.images && item.images[0] ? item.images[0] : '';
+    const mainImg = getAbsoluteAssetPath(item.images && item.images[0] ? item.images[0] : '');
     const badgeHtml = item.badge ? `<span class="product-badge">${item.badge}</span>` : '';
 
     card.innerHTML = `
@@ -337,6 +337,15 @@ function updateMetaTag(property, attribute, value) {
     document.head.appendChild(element);
   }
   element.setAttribute('content', value);
+}
+
+// --- UTILITY: ABSOLUTE ASSETS RESOLVER ---
+function getAbsoluteAssetPath(pathStr) {
+  if (!pathStr) return '';
+  if (pathStr.startsWith('http') || pathStr.startsWith('data:') || pathStr.startsWith('/')) {
+    return pathStr;
+  }
+  return '/' + pathStr;
 }
 
 // --- UTILITY: HEX COLOR LABELS ---
