@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View product specifications, highlights, available sizes/colors, and request customized wholesale quotes via WhatsApp.">
+  <title>Product Details | Kalavathi Plastics</title>
+  <link rel="stylesheet" href="styles.css?v=1.3">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">K</span>
+        <span>KALAVATHI <span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span></span>
+      </a>
+      
+      <nav class="nav-links-wrapper">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#category-highlights">Collections</a></li>
+          <li><a href="/#products">Shop</a></li>
+          <li><a href="/#why-us">About</a></li>
+          <li><a href="/#process">Process</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="cart-toggle" class="cart-toggle" aria-label="Open Inquiry List">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN DETAILS LAYOUT -->
+  <main class="container" style="margin-top: 100px; min-height: 80vh;">
+    <!-- Breadcrumb -->
+    <div id="product-breadcrumb" class="breadcrumb">
+      <!-- Generated Dynamically: Home > Products > Soap Holder -->
+    </div>
+
+    <!-- Two-column product details layout -->
+    <div class="product-detail-layout">
+      <!-- Left side: Image Gallery -->
+      <div class="gallery-container">
+        <div class="main-image-viewport">
+          <div id="detail-image-skeleton" class="skeleton-shimmer" style="position: absolute; top:0; left:0; width:100%; height:100%; border-radius: 24px; display: block;"></div>
+          <img id="detail-main-image" class="zoomable" src="" alt="Main Product Image" style="opacity: 0; transition: opacity 0.3s ease;">
+        </div>
+        <div id="detail-thumbnails" class="thumbnails-container">
+          <!-- Thumbnail buttons generated dynamically -->
+        </div>
+      </div>
+
+      <!-- Right side: Product Information -->
+      <div class="product-info-container">
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.5rem;">
+          <span id="detail-badge" class="product-badge" style="position: static; transform: none; display: none;"></span>
+          <span id="detail-category" class="admin-badge" style="background: rgba(184, 134, 46, 0.08); color: var(--color-accent); font-weight: 700; font-size: 0.8rem; padding: 0.2rem 0.6rem; border-radius: 4px;"></span>
+        </div>
+        <h1 id="detail-title" class="details-title">Product Name</h1>
+        
+        <p id="detail-short-desc" style="font-size: 1.15rem; line-height: 1.6; color: var(--color-secondary-text); margin-bottom: 2rem; font-family: var(--font-body);"></p>
+
+        <!-- Colors Selection -->
+        <div id="detail-colors-section" style="display: none; margin-bottom: 2rem;">
+          <h4 class="swatch-group-title">Available Colors</h4>
+          <div id="detail-colors" class="swatches-container"></div>
+        </div>
+
+        <!-- Sizes Selection -->
+        <div id="detail-sizes-section" style="display: none; margin-bottom: 2rem;">
+          <h4 class="swatch-group-title">Select Size</h4>
+          <div id="detail-sizes" class="swatches-container"></div>
+        </div>
+
+        <!-- Highlights Bullet List -->
+        <div style="margin-top: 2rem;">
+          <h4 class="swatch-group-title">Key Highlights</h4>
+          <ul id="detail-features" style="padding-left: 1.2rem; margin: 0; color: var(--color-secondary-text); font-size: 0.95rem; line-height: 1.6;">
+            <!-- Bullet points -->
+          </ul>
+        </div>
+
+        <!-- Specifications Table -->
+        <table class="specs-table">
+          <tbody id="detail-specs-body">
+            <!-- Property / Value pairs -->
+          </tbody>
+        </table>
+
+        <!-- Wholesale highlight box -->
+        <div class="wholesale-highlight-box">
+          <h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Wholesale Orders Only
+          </h4>
+          <ul>
+            <li>Bulk quantity available</li>
+            <li>Contact us for customized quotes</li>
+            <li>Minimum Order Quantity (MOQ) applies</li>
+          </ul>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="details-action-buttons">
+          <button id="detail-whatsapp-btn" class="btn btn-accent">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Request Quote
+          </button>
+          <a id="detail-call-btn" href="tel:+916302263377" class="btn btn-primary" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long Description -->
+    <div>
+      <h3 class="details-section-title">Product Description</h3>
+      <p id="detail-full-desc" class="full-description-text"></p>
+    </div>
+
+    <!-- Related Products Grid -->
+    <div style="margin-bottom: 5rem;">
+      <h3 class="details-section-title">Related Products</h3>
+      <div id="related-products-grid" class="product-grid">
+        <!-- Renders 4 related products using the same card layout -->
+      </div>
+    </div>
+  </main>
+
+  <!-- CART SIDEBAR DRAWER -->
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="drawer-header">
+      <h3>Inquiry List</h3>
+      <button id="drawer-close" class="drawer-close" aria-label="Close Inquiry list">&times;</button>
+    </div>
+    <div id="cart-items" class="cart-items-container">
+      <!-- Items generated dynamically -->
+    </div>
+    <div class="drawer-footer">
+      <div class="inquiry-form-group" style="margin-bottom: 1rem;">
+        <label for="client-notes" style="font-size: 0.75rem; margin-bottom: 0.3rem;">Order Notes (Optional)</label>
+        <textarea id="client-notes" class="whatsapp-text-notes" rows="3" placeholder="Specify colors, packaging preference, or delivery requirements here..."></textarea>
+      </div>
+      <button id="send-whatsapp-btn" class="btn btn-accent" style="width: 100%; border-radius: 8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Request Quotation via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- FLOATING NOTICE BANNER -->
+  <div id="delivery-notice-banner" class="floating-notice-banner">
+    <div class="notice-content">
+      <span class="notice-icon">⚠️</span>
+      <span class="notice-text">No Online Delivery</span>
+    </div>
+    <button id="close-notice-btn" class="close-notice-btn" aria-label="Dismiss Notice">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- PREMIUM FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" style="color: var(--color-primary-text);">
+          <span class="logo-icon" style="background: var(--color-accent); color: var(--color-warm-cream);">K</span>
+          <span>KALAVATHI <span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span></span>
+        </a>
+        <p>Thoughtfully curated home and lifestyle essentials, offering simple elegance and dependable quality since 2011.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Our Collections</h4>
+        <ul>
+          <li><a href="/#products">Storage & Utility</a></li>
+          <li><a href="/#products">Kitchen & Dining</a></li>
+          <li><a href="/#products">Cleaning Essentials</a></li>
+          <li><a href="/#products">Bathroom Accessories</a></li>
+          <li><a href="/#products">Home & Garden</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Credentials & Contact</h4>
+        <div class="footer-contact-list">
+          <p>📍 NGO Colony, Kadapa - 516001, AP</p>
+          <p>📞 Cell: +91 63022 63377</p>
+          <p>✉️ balubalaji2428@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Kalavathi Plastics. All rights reserved. Designed for curated living.
+        <a href="admin.html" class="admin-lock-link" aria-label="Admin Login" title="Owner Access Only">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 6px; opacity: 0.6; transition: opacity 0.2s ease;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </a>
+      </p>
+      <div class="footer-badges">
+        <span class="footer-badge">GSTIN: 37BUNPR9190J1ZM</span>
+        <span class="footer-badge">Composition Scheme</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CORE SCRIPTS -->
+  <script src="products-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-db.js"></script>
+  <script src="product-detail.js"></script>
+</body>
+</html>

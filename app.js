@@ -16,6 +16,14 @@ try {
 
 // --- APP STATE ---
 let inquiryCart = [];
+try {
+  const cachedCart = localStorage.getItem('inquiryCart');
+  if (cachedCart) {
+    inquiryCart = JSON.parse(cachedCart) || [];
+  }
+} catch (e) {
+  console.error('Failed to parse cached inquiry cart on load:', e);
+}
 let currentModalProduct = null;
 let currentModalQty = 1;
 let selectedVariant = "";
@@ -588,6 +596,7 @@ function addToInquiryWithQty(id, qty, variant) {
 
   updateCartCount();
   renderCartItems();
+  localStorage.setItem('inquiryCart', JSON.stringify(inquiryCart));
   openDrawer();
 }
 
@@ -605,10 +614,12 @@ function updateQuantity(id, action) {
   }
   updateCartCount();
   renderCartItems();
+  localStorage.setItem('inquiryCart', JSON.stringify(inquiryCart));
 }
 
 function removeCartItem(id) {
   inquiryCart = inquiryCart.filter(item => item.id !== id);
+  localStorage.setItem('inquiryCart', JSON.stringify(inquiryCart));
   updateCartCount();
   renderCartItems();
 }
@@ -654,7 +665,7 @@ if (cartItemsContainer) {
   });
 }
 
-// Product delegation (click card to open modal, click plus to add directly)
+// Product delegation (click card to navigate to details page, click plus to add directly)
 if (productGrid) {
   productGrid.addEventListener('click', (e) => {
     const addBtn = e.target.closest('.btn-add-inquiry');
@@ -665,7 +676,12 @@ if (productGrid) {
     }
     const card = e.target.closest('.product-card');
     if (card) {
-      openProductModal(card.dataset.id);
+      const product = PRODUCTS.find(p => p.id === card.dataset.id);
+      if (product) {
+        // Save scroll position before navigating
+        sessionStorage.setItem('homeScrollPosition', window.scrollY);
+        window.location.href = `/products/${product.slug}`;
+      }
     }
   });
 }
@@ -897,6 +913,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     renderProducts(PRODUCTS);
+    
+    // Initialize cart state values on load
+    updateCartCount();
+    renderCartItems();
+
+    // Restore scroll position if returning from product details page
+    const savedScrollPos = sessionStorage.getItem('homeScrollPosition');
+    if (savedScrollPos) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(savedScrollPos),
+          behavior: 'instant'
+        });
+        sessionStorage.removeItem('homeScrollPosition');
+      }, 100);
+    }
   } catch (err) {
     console.error('Error rendering products during bootstrap:', err);
   }
