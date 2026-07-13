@@ -233,7 +233,7 @@ function renderProducts(items) {
   if (!productGrid) return;
   productGrid.innerHTML = '';
   
-  if (items.length === 0) {
+  if (!items || !Array.isArray(items) || items.length === 0) {
     productGrid.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: var(--color-secondary-text);">
         <p>No products match your search. Try resetting your search filter.</p>
@@ -243,14 +243,18 @@ function renderProducts(items) {
   }
 
   items.forEach(product => {
+    if (!product) return;
     const card = document.createElement('div');
     card.className = 'product-card reveal';
     card.dataset.id = product.id;
+    const mainImg = product.images && product.images[0] ? product.images[0] : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="300" height="300" fill="%23eee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="%23777">No Image</text></svg>';
+    const badgeHtml = product.badge ? `<span class="product-badge">${product.badge}</span>` : '';
+    
     card.innerHTML = `
       <div class="product-image-container" style="cursor: pointer;" id="img-container-${product.id}">
-        <span class="product-badge">${product.badge}</span>
+        ${badgeHtml}
         <div class="skeleton-shimmer" id="skel-${product.id}"></div>
-        <img class="product-image" src="${product.images[0]}" alt="${product.name}" loading="lazy" 
+        <img class="product-image" src="${mainImg}" alt="${product.name}" loading="lazy" 
              onload="document.getElementById('skel-${product.id}').style.display='none'; this.classList.add('loaded');"
              onerror="handleProductImageError(this, '${product.id}', '${product.name}', 'normal');">
       </div>
@@ -869,6 +873,9 @@ function initCategoryTiles() {
 
 // --- BOOTSTRAP ---
 document.addEventListener('DOMContentLoaded', async () => {
+  // Initialize scroll reveals immediately so layout contents show
+  initScrollReveal();
+  
   // Load products from Supabase cloud (or local fallback)
   if (typeof SupabaseDB !== 'undefined') {
     PRODUCTS = await SupabaseDB.fetchProducts();
