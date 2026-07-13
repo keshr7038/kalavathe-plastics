@@ -589,13 +589,42 @@ if (exportDbBtn) {
 }
 
 if (resetDbBtn) {
-  resetDbBtn.addEventListener('click', () => {
-    if (confirm('WARNING: Are you sure you want to clear all product listings changes and reset to default code templates? This action cannot be undone.')) {
-      localStorage.removeItem('products');
-      
-      // If Supabase is connected, we might want to warn they should reset table. We only clear local cache first.
-      alert('Database successfully reset. Loading default listings.');
-      window.location.reload();
+  resetDbBtn.addEventListener('click', async () => {
+    if (confirm('WARNING: Are you sure you want to clear all product listings changes and reset both local storage and cloud database to default catalog templates? This will overwrite existing products.')) {
+      try {
+        localStorage.removeItem('products');
+        
+        if (typeof SupabaseDB !== 'undefined' && SupabaseDB.isConfigured && SupabaseDB.client) {
+          resetDbBtn.textContent = '⏳ Resetting Cloud...';
+          resetDbBtn.disabled = true;
+          
+          const dbProducts = DEFAULT_PRODUCTS.map(p => ({
+            id: p.id,
+            name: p.name,
+            category: p.category,
+            description: p.description,
+            badge: p.badge || null,
+            variants: p.variants || [],
+            features: p.features || [],
+            images: p.images || []
+          }));
+
+          const { error } = await SupabaseDB.client
+            .from('products')
+            .upsert(dbProducts);
+
+          if (error) throw error;
+        }
+
+        alert('Database successfully reset to default templates.');
+        window.location.reload();
+      } catch (err) {
+        console.error('Reset database error:', err);
+        alert('Reset failed: ' + err.message);
+      } finally {
+        resetDbBtn.textContent = 'Reset Database to Default Code';
+        resetDbBtn.disabled = false;
+      }
     }
   });
 }
