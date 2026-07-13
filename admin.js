@@ -172,34 +172,43 @@ function updateConnectionStatus() {
 
 // --- DATA ACCESS LAYER ---
 async function loadDashboardData() {
-  updateConnectionStatus();
+  try {
+    updateConnectionStatus();
 
-  // Load asynchronously using Supabase client
-  if (typeof SupabaseDB !== 'undefined') {
-    cachedProductsList = await SupabaseDB.fetchProducts();
-    cachedInquiriesList = await SupabaseDB.fetchInquiries();
-  } else {
-    cachedProductsList = JSON.parse(localStorage.getItem('products')) || [];
-    cachedInquiriesList = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+    // Load asynchronously using Supabase client
+    if (typeof SupabaseDB !== 'undefined') {
+      cachedProductsList = await SupabaseDB.fetchProducts();
+      cachedInquiriesList = await SupabaseDB.fetchInquiries();
+    } else {
+      cachedProductsList = JSON.parse(localStorage.getItem('products')) || [];
+      cachedInquiriesList = JSON.parse(localStorage.getItem('whatsappInquiries')) || [];
+    }
+
+    renderOverviewAnalytics(cachedInquiriesList);
+    renderProductManagerTable(cachedProductsList);
+    populateSettingsForm();
+  } catch (err) {
+    console.error('Error loading dashboard data:', err);
+    alert('Dashboard Load Error: ' + err.message);
   }
-
-  renderOverviewAnalytics(cachedInquiriesList);
-  renderProductManagerTable(cachedProductsList);
-  populateSettingsForm();
 }
 
 // 1. Overview & Analytics Tab
 function renderOverviewAnalytics(inquiries) {
+  if (!inquiries || !Array.isArray(inquiries)) inquiries = [];
   let totalClicks = inquiries.length;
   let totalItemsCount = 0;
   let itemPopularityMap = {};
 
   inquiries.forEach(inq => {
-    if (inq.items && Array.isArray(inq.items)) {
+    if (inq && inq.items && Array.isArray(inq.items)) {
       inq.items.forEach(item => {
-        totalItemsCount += (item.quantity || 0);
-        const baseTitle = item.title.split('–')[0].trim();
-        itemPopularityMap[baseTitle] = (itemPopularityMap[baseTitle] || 0) + (item.quantity || 0);
+        if (item) {
+          totalItemsCount += (item.quantity || 0);
+          const rawTitle = item.title ? item.title : 'Unknown Product';
+          const baseTitle = rawTitle.split('–')[0].split('-')[0].trim();
+          itemPopularityMap[baseTitle] = (itemPopularityMap[baseTitle] || 0) + (item.quantity || 0);
+        }
       });
     }
   });
@@ -279,6 +288,7 @@ function renderOverviewAnalytics(inquiries) {
 
 // 2. Product Manager Table
 function renderProductManagerTable(products) {
+  if (!products || !Array.isArray(products)) products = [];
   if (productManagerBody) {
     productManagerBody.innerHTML = '';
     
