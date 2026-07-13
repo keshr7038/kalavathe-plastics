@@ -699,7 +699,7 @@ if (sendWhatsAppBtn) {
     }
 
     const encodedMessage = encodeURIComponent(message);
-    const phoneNumber = '919966089248'; // Verified business phone
+    const phoneNumber = '916302263377'; // Verified business phone
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
