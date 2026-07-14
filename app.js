@@ -883,18 +883,26 @@ function initFloatingNotice() {
 }
 
 // --- CATEGORY NAVIGATION (TILES & MARQUEE) ---
+window.filterCategoryFromMarquee = function(category) {
+  const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+  if (targetBtn) {
+    targetBtn.click();
+    const productsSection = document.getElementById('products');
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  } else {
+    window.location.href = `/?category=${encodeURIComponent(category)}#products`;
+  }
+};
+
 function initCategoryTiles() {
   const elements = document.querySelectorAll('.category-tile, .marquee-category-btn');
   elements.forEach(tile => {
-    tile.addEventListener('click', () => {
+    tile.addEventListener('click', (e) => {
       const category = tile.dataset.category;
-      const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
-      if (targetBtn) {
-        targetBtn.click();
-        const productsSection = document.getElementById('products');
-        if (productsSection) {
-          productsSection.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (category) {
+        window.filterCategoryFromMarquee(category);
       }
     });
   });
@@ -944,6 +952,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     initActiveNavLinks();
     initFloatingNotice();
     initCategoryTiles();
+
+    // Check for category query parameter on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const catParam = urlParams.get('category');
+    if (catParam) {
+      setTimeout(() => {
+        window.filterCategoryFromMarquee(catParam);
+      }, 350);
+    }
   } catch (err) {
     console.error('Error running animations/listeners during bootstrap:', err);
   }
