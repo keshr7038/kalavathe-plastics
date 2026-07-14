@@ -3337,6 +3337,7 @@ footer {
 }
 
 .chatbot-header-info h4 {
+  color: #ffffff;
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 700;
