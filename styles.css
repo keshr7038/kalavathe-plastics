@@ -3163,3 +3163,45 @@ footer {
 .marquee-row:hover .marquee-track {
   animation-play-state: paused;
 }
+
+/* Floating WhatsApp Button inside Hero Section */
+.hero-whatsapp-btn {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 4rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #25d366;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 1.75rem;
+  border-radius: 100px;
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.35);
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.hero-whatsapp-btn:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+  color: #ffffff;
+}
+
+.hero-whatsapp-btn svg {
+  fill: #ffffff;
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 768px) {
+  .hero-whatsapp-btn {
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.85rem;
+  }
+}
