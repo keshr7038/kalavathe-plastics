@@ -3033,7 +3033,7 @@ footer {
 
 .hero-marquee-section {
   width: 100%;
-  margin-top: 10rem; /* Pushed down further for balanced layout spacing */
+  margin-top: 5.5rem; /* Pulled closer to the brand heading */
   overflow: hidden;
   display: flex;
   flex-direction: column;
