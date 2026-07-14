@@ -971,6 +971,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initActiveNavLinks();
     initFloatingNotice();
     initCategoryTiles();
+    initAIChatbot();
 
     // Check for category query parameter on load
     const urlParams = new URLSearchParams(window.location.search);
@@ -984,3 +985,124 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error running animations/listeners during bootstrap:', err);
   }
 });
+
+function initAIChatbot() {
+  const chatbotToggle = document.getElementById('chatbot-toggle-btn');
+  const chatbotWindow = document.getElementById('chatbot-window');
+  const chatbotClose = document.getElementById('chatbot-close-btn');
+  const chatbotForm = document.getElementById('chatbot-input-form');
+  const chatbotInput = document.getElementById('chatbot-input-field');
+  const chatbotMessages = document.getElementById('chatbot-messages');
+
+  if (!chatbotToggle || !chatbotWindow || !chatbotClose || !chatbotForm || !chatbotInput || !chatbotMessages) {
+    return;
+  }
+
+  // Toggle chatbot visibility
+  chatbotToggle.addEventListener('click', () => {
+    chatbotWindow.classList.toggle('open');
+    if (chatbotWindow.classList.contains('open')) {
+      chatbotInput.focus();
+    }
+  });
+
+  chatbotClose.addEventListener('click', () => {
+    chatbotWindow.classList.remove('open');
+  });
+
+  // Handle message submission
+  chatbotForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const messageText = chatbotInput.value.trim();
+    if (!messageText) return;
+
+    // Append user message
+    appendChatMessage('user', messageText);
+    chatbotInput.value = '';
+
+    // Scroll to bottom
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    // Generate typing delay
+    setTimeout(() => {
+      const reply = getChatbotReply(messageText);
+      appendChatMessage('assistant', reply);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }, 450);
+  });
+
+  function appendChatMessage(sender, text) {
+    const msgElement = document.createElement('div');
+    msgElement.className = `chat-message ${sender}`;
+    
+    // Format bold labels and bullet items into HTML paragraphs/lists
+    let formattedText = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>')
+      .replace(/• (.*?)(<br>|$)/g, '<li>$1</li>');
+      
+    if (formattedText.includes('<li>')) {
+      formattedText = formattedText.replace(/(<li>.*?<\/li>)+/g, '<ul>$&</ul>');
+    }
+
+    msgElement.innerHTML = `<div class="message-content">${formattedText}</div>`;
+    chatbotMessages.appendChild(msgElement);
+  }
+
+  function getChatbotReply(query) {
+    const q = query.toLowerCase().trim();
+    
+    // Check if user is asking to add a product to the inquiry list
+    if (q.includes('add') || q.includes('select') || q.includes('inquiry')) {
+      for (const p of PRODUCTS) {
+        const nameParts = p.name.toLowerCase().split(' ');
+        const match = nameParts.some(part => part.length > 3 && q.includes(part)) || q.includes(p.slug.split('-')[0]);
+        if (match) {
+          if (typeof addToInquiry === 'function') {
+            addToInquiry(p.id);
+            if (typeof openDrawer === 'function') openDrawer();
+            return `I have successfully added the **${p.name}** (ID: ${p.id}) to your inquiry list! I have also opened the inquiry cart drawer so you can review it. What else would you like to add?`;
+          }
+        }
+      }
+    }
+
+    // Product search
+    for (const p of PRODUCTS) {
+      const nameParts = p.name.toLowerCase().split(' ');
+      const match = nameParts.some(part => part.length > 3 && q.includes(part)) || q.includes(p.slug.split('-')[0]);
+      if (match) {
+        let specsText = '';
+        if (p.specifications) {
+          specsText = Object.entries(p.specifications)
+            .map(([key, val]) => `• **${key}**: ${val}`)
+            .join('\n');
+        }
+        return `Here are the specifications for **${p.name}**:\n\n• **Collection**: ${p.category}\n• **Wholesale Price**: ₹${p.price || 'Contact for quote'}\n${specsText}\n\nWould you like me to add this to your inquiry list? Just ask "add ${p.name}".`;
+      }
+    }
+
+    // General FAQ mapping
+    if (q.includes('price') || q.includes('cost') || q.includes('wholesale')) {
+      return `We offer highly competitive wholesale pricing for commercial inquiries. Individual products range from ₹30 to ₹250. You can build an inquiry list by clicking the "+" button on our product catalog to get a custom quote sent directly to our WhatsApp!`;
+    }
+    
+    if (q.includes('deliver') || q.includes('ship') || q.includes('transport') || q.includes('kadapa') || q.includes('rayalaseema')) {
+      return `Yes! We provide safe local transport loading and logistics delivery drops directly across Kadapa and the broader Rayalaseema region.`;
+    }
+
+    if (q.includes('order') || q.includes('buy') || q.includes('how to') || q.includes('purchase')) {
+      return `To place a wholesale order:\n1. Browse our collections.\n2. Click "+" on any item to add it to your Inquiry List.\n3. Open your Cart Drawer in the top right.\n4. Click "Send WhatsApp Inquiry" to share your list with us directly!`;
+    }
+
+    if (q.includes('contact') || q.includes('phone') || q.includes('whatsapp') || q.includes('call')) {
+      return `You can reach our wholesale coordinator directly via WhatsApp at **916302263377** or click the floating WhatsApp button in the corner!`;
+    }
+
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('namaste')) {
+      return `Hello! How can I assist you with your wholesale plastics inquiry today? You can ask me about product specifications, pricing, delivery, or ask me to add items to your list!`;
+    }
+
+    return `I'm here to help you coordinate wholesale orders. You can ask about:\n• Product prices & specs (e.g. "What are the specs of vessels?")\n• Transport & delivery logistics\n• How to place an order\n• Or say "add [product name]" to select an item!`;
+  }
+}
