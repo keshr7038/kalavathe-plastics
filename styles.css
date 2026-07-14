@@ -3017,16 +3017,17 @@ footer {
 }
 
 /* ==========================================================================
-   INFINITE SCROLLING PRODUCT MARQUEES
+   INFINITE SCROLLING BRAND TYPOGRAPHY MARQUEES
    ========================================================================== */
 
 .hero-marquee-section {
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 8rem; /* Pushed down to give spacing from collections button */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
 }
 
 .marquee-row {
@@ -3035,7 +3036,10 @@ footer {
   width: 100%;
   user-select: none;
   position: relative;
-  padding: 0.5rem 0;
+  border-top: 1px solid rgba(184, 134, 46, 0.12);
+  border-bottom: 1px solid rgba(184, 134, 46, 0.12);
+  padding: 1.25rem 0;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* Side blur overlays for smooth fade out */
@@ -3043,7 +3047,7 @@ footer {
   content: "";
   position: absolute;
   top: 0;
-  width: 120px;
+  width: 150px;
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -3061,54 +3065,54 @@ footer {
 
 .marquee-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
   width: max-content;
+  align-items: center;
 }
 
-.marquee-item {
+.marquee-text {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.75rem;
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(170, 126, 59, 0.15);
-  border-radius: 100px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
-  cursor: pointer;
-}
-
-.marquee-item:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent);
-  background-color: #ffffff;
-}
-
-.marquee-item img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: #ffffff;
-  padding: 0.25rem;
-  border: 1px solid var(--color-divider);
-}
-
-.marquee-item span {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-primary-text);
+  gap: 3rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+.marquee-text.marquee-dark {
+  color: var(--color-primary-text);
+  opacity: 0.85;
+}
+
+.marquee-text span {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.marquee-text span::after {
+  content: "✦";
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  opacity: 0.55;
+}
+
+.marquee-text.marquee-dark span::after {
+  color: var(--color-primary-text);
+  opacity: 0.35;
 }
 
 /* Animations */
 .marquee-left-to-right .marquee-track {
-  animation: scroll-ltr 35s linear infinite;
+  animation: scroll-ltr 45s linear infinite;
 }
 
 .marquee-right-to-left .marquee-track {
-  animation: scroll-rtl 35s linear infinite;
+  animation: scroll-rtl 45s linear infinite;
 }
 
 @keyframes scroll-ltr {
