@@ -37,9 +37,29 @@
           </svg>
           <span class="cart-count">0</span>
         </button>
+
+        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- FLOATING MOBILE MENU DROPDOWN -->
+  <div id="mobile-nav-panel" class="mobile-nav-panel">
+    <ul class="mobile-nav-links">
+      <li><a href="#hero" class="active">Home</a></li>
+      <li><a href="#category-highlights">Collections</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#why-us">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 
   <!-- HERO SECTION -->
   <section id="hero" class="hero">
@@ -50,7 +70,7 @@
           <span style="font-family: var(--font-heading); color: var(--color-accent); font-weight: 500; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase;">Kalavathi Plastics</span>
         </div>
         
-        <h1 class="hero-title text-gradient" style="font-size: 5rem; line-height: 1.05; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: -0.02em; text-align: center;">
+        <h1 class="hero-title text-gradient" style="font-size: clamp(2.6rem, 8vw, 4.8rem); line-height: 1.05; font-weight: 800; margin-bottom: 2.5rem; letter-spacing: -0.02em; text-align: center;">
           KALAVATHI <br><span style="font-weight: 300; color: var(--color-accent);">PLASTICS</span>
         </h1>
       </div>

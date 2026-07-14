@@ -1465,9 +1465,86 @@ footer {
   }
 }
 
+.menu-toggle {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav-links-wrapper {
     display: none; /* Hide regular links in mobile to keep it simple, or build drawer */
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    color: var(--color-primary-text);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+  }
+
+  .menu-toggle:hover {
+    background-color: rgba(184, 134, 46, 0.08);
+  }
+
+  /* Floating Mobile Dropdown Menu Panel */
+  .mobile-nav-panel {
+    position: fixed;
+    top: 6.5rem; /* Sits directly below the floating header */
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    width: calc(100% - 2rem);
+    max-width: 480px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(170, 126, 59, 0.18);
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    padding: 1.5rem;
+  }
+
+  .mobile-nav-panel.open {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .mobile-nav-links a {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary-text);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-nav-links a:hover,
+  .mobile-nav-links a.active {
+    background: rgba(184, 134, 46, 0.08);
+    color: var(--color-accent);
+    padding-left: 1.6rem;
   }
   
   .why-us-grid {

@@ -972,6 +972,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initFloatingNotice();
     initCategoryTiles();
     initAIChatbot();
+    initMobileMenu();
 
     // Check for category query parameter on load
     const urlParams = new URLSearchParams(window.location.search);
@@ -1105,4 +1106,39 @@ function initAIChatbot() {
 
     return `I'm here to help you coordinate wholesale orders. You can ask about:\n• Product prices & specs (e.g. "What are the specs of vessels?")\n• Transport & delivery logistics\n• How to place an order\n• Or say "add [product name]" to select an item!`;
   }
+}
+
+function initMobileMenu() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileNavPanel = document.getElementById('mobile-nav-panel');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+  if (!menuToggle || !mobileNavPanel) return;
+
+  // Toggle mobile navigation panel
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileNavPanel.classList.toggle('open');
+    menuToggle.classList.toggle('active');
+  });
+
+  // Close when clicking a nav link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNavPanel.classList.remove('open');
+      menuToggle.classList.remove('active');
+      
+      // Update active state style
+      mobileLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  // Close menu when clicking outside of it
+  document.addEventListener('click', (e) => {
+    if (!mobileNavPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+      mobileNavPanel.classList.remove('open');
+      menuToggle.classList.remove('active');
+    }
+  });
 }
