@@ -211,28 +211,33 @@ a {
 /* --- HEADER / NAVIGATION --- */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  background-color: rgba(255, 255, 255, 0.88);
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(170, 126, 59, 0.12);
+  border: 1px solid rgba(170, 126, 59, 0.15);
+  border-radius: 100px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
   transition: var(--transition-smooth);
 }
 
 header.scrolled {
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  padding: 0.3rem 0;
+  background-color: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 90px;
+  height: 74px;
+  padding: 0 2.5rem;
 }
 
 .logo {
