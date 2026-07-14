@@ -1465,7 +1465,8 @@ footer {
   }
 }
 
-.menu-toggle {
+.menu-toggle,
+.mobile-nav-panel {
   display: none;
 }
 
@@ -1494,6 +1495,7 @@ footer {
 
   /* Floating Mobile Dropdown Menu Panel */
   .mobile-nav-panel {
+    display: block;
     position: fixed;
     top: 6.5rem; /* Sits directly below the floating header */
     left: 50%;
