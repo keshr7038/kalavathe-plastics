@@ -869,16 +869,35 @@ function initActiveNavLinks() {
 function initFloatingNotice() {
   const noticeBanner = document.getElementById('delivery-notice-banner');
   const closeNoticeBtn = document.getElementById('close-notice-btn');
+  const heroSection = document.getElementById('hero');
   localStorage.removeItem('deliveryNoticeDismissed');
   
   if (noticeBanner && closeNoticeBtn) {
     closeNoticeBtn.addEventListener('click', () => {
       noticeBanner.classList.add('dismissed');
+      noticeBanner.classList.remove('show');
       sessionStorage.setItem('deliveryNoticeDismissed', 'true');
     });
-    if (sessionStorage.getItem('deliveryNoticeDismissed') === 'true') {
-      noticeBanner.classList.add('dismissed');
-    }
+
+    const handleScroll = () => {
+      // If already dismissed, hide completely
+      if (sessionStorage.getItem('deliveryNoticeDismissed') === 'true') {
+        noticeBanner.classList.add('dismissed');
+        noticeBanner.classList.remove('show');
+        return;
+      }
+      
+      const heroHeight = heroSection ? heroSection.offsetHeight : 600;
+      // Show notice when user scrolls past the hero section, hide when viewing hero
+      if (window.scrollY > (heroHeight - 120)) {
+        noticeBanner.classList.add('show');
+      } else {
+        noticeBanner.classList.remove('show');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
   }
 }
 
