@@ -3094,6 +3094,16 @@ footer {
   gap: 3rem;
 }
 
+.marquee-category-btn {
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.marquee-category-btn:hover {
+  color: var(--color-primary-text);
+  transform: scale(1.05);
+}
+
 .marquee-text span::after {
   content: "✦";
   font-size: 1.1rem;

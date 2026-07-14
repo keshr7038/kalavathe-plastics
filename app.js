@@ -882,10 +882,10 @@ function initFloatingNotice() {
   }
 }
 
-// --- CATEGORY TILES NAVIGATION ---
+// --- CATEGORY NAVIGATION (TILES & MARQUEE) ---
 function initCategoryTiles() {
-  const categoryTiles = document.querySelectorAll('.category-tile');
-  categoryTiles.forEach(tile => {
+  const elements = document.querySelectorAll('.category-tile, .marquee-category-btn');
+  elements.forEach(tile => {
     tile.addEventListener('click', () => {
       const category = tile.dataset.category;
       const targetBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
