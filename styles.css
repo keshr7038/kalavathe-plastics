@@ -3015,3 +3015,121 @@ footer {
   color: var(--color-secondary-text);
   margin-bottom: 4rem;
 }
+
+/* ==========================================================================
+   INFINITE SCROLLING PRODUCT MARQUEES
+   ========================================================================== */
+
+.hero-marquee-section {
+  width: 100%;
+  margin-top: 5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.marquee-row {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  user-select: none;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+/* Side blur overlays for smooth fade out */
+.marquee-row::before, .marquee-row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-row::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-primary-bg) 0%, rgba(253, 251, 247, 0) 100%);
+}
+
+.marquee-row::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-primary-bg) 0%, rgba(253, 251, 247, 0) 100%);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.75rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(170, 126, 59, 0.15);
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.marquee-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  background-color: #ffffff;
+}
+
+.marquee-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 0.25rem;
+  border: 1px solid var(--color-divider);
+}
+
+.marquee-item span {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary-text);
+  white-space: nowrap;
+}
+
+/* Animations */
+.marquee-left-to-right .marquee-track {
+  animation: scroll-ltr 35s linear infinite;
+}
+
+.marquee-right-to-left .marquee-track {
+  animation: scroll-rtl 35s linear infinite;
+}
+
+@keyframes scroll-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes scroll-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Interactive hover behavior */
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
